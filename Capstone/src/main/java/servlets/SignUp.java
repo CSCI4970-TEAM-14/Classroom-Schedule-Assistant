@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import models.Account;
 import Util.UtilAccount;
 /**
  * Servlet implementation class SignUp
@@ -36,25 +38,25 @@ public class SignUp extends HttpServlet {
 
 		//Checks if all fields were filled
 		if (userName.isEmpty() || firstName.isEmpty() || lastName.isEmpty() ||  email.isEmpty() || password.isEmpty()) {
-			session.setAttribute("missingInfo", "true");
-			response.sendRedirect("signUpForm.jsp");
+			session.setAttribute("missing", "true");
+			response.sendRedirect("register.jsp");
 		}
 
 		//Checks if any fields inserted exceeded 20 characters
 		else if (userName.length() > 20 || firstName.length() > 20 || lastName.length() > 20 || email.length() > 20 || password.length() > 20) {
 			session.setAttribute("fields", "true");
-			response.sendRedirect("signUpForm.jsp");
+			response.sendRedirect("register.jsp");
 		}
 		//Checks if the username is taken
 		else if (UtilAccount.getAccount(userName) != null) {
 			session.setAttribute("username", "true");
-			response.sendRedirect("signUpForm.jsp");
+			response.sendRedirect("register.jsp");
 		}
 
 		//Adds the account to the database or fails to
 		else if (!UtilAccount.createAccount(userName,firstName,lastName,email,password)) {
 			session.setAttribute("failed", "true");
-			response.sendRedirect("signUpForm.jsp");
+			response.sendRedirect("register.jsp");
 		}
 
 		else {
