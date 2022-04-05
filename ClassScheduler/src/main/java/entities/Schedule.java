@@ -13,11 +13,11 @@ import javax.persistence.Table;
 /**
  * CREATE TABLE Schedule 
  * (	day varchar(50) NOT NULL,
- * 		startTime varchar(),
- * 		endTime varchar(),
+ * 		start varchar(),
+ * 		end varchar(),
  * 		sectionId varchar(),
  * 		FOREIGN KEY(sectionId) REFERENCES Section(ID),
- *      PRIMARY KEY (day));
+ *      //PRIMARY KEY (day));
  */
 @Entity
 @Table(name = "Schedule")

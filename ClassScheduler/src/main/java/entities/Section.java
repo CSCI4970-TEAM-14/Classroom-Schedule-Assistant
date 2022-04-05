@@ -61,7 +61,7 @@ public class Section implements Serializable{
 	public Section() {
 	}
 
-	public Section(String Id, String type, String method, String instructor, String term, String enroll, String meeting, String room, String courseId) {
+	public Section(String Id, String courseId, String type, String method, String enroll, String room, String instructor, String meeting,String term) {
 		
 		this.Id = Id;
 		this.type = type;

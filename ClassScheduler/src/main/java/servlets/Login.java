@@ -36,7 +36,7 @@ public class Login extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		String userId = request.getParameter("userId");
-		String pwd = request.getParameter("password");
+		String pwd = request.getParameter("pwd");
 		
 				
 		Account acc = UtilAccount.getAccount(userId);

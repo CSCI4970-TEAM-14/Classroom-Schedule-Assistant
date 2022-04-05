@@ -32,16 +32,16 @@
 			<%if (session != null){
 					session.invalidate();} %>
 
-		<form action="./Register" method="POST">
+		<form action="./Login" method="POST">
 			<div class="imgcontainer">
 				<i class="glyphicon glyphicon-user"></i>
 			</div>
 			
 			<div class="container">
-				<label for="uname"><b>UserId</b></label> <input type="text"
-					placeholder="Enter UserId" name="uname" required> <label
+				<label for="UserId"><b>UserId</b></label> <input type="text"
+					placeholder="Enter UserId" name="UserId" required> <label
 					for="pwd"><b>Password</b></label> <input type="password"
-					placeholder="Enter Password" name="psw" required>
+					placeholder="Enter Password" name="pwd" required>
 
 				<button type="submit" style="color: white">Login</button>
 			</div>
@@ -49,7 +49,7 @@
 			<div class="container"
 				style="background-color: #f1f1f1; border: 1px solid white;">
 				<button type="button" class="cancelbtn">Cancel</button>
-				<span class="psw">Forgot <a href="#">password?</a></span>
+				<span class="pws">Forgot <a href="#">password?</a></span>
 			</div>
 		</form>
 	</div>

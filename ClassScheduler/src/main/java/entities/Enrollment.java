@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 /**
  * CREATE TABLE Enrollment 
- * (	Seats varchar() NOT NULL,
+ * (	Seat varchar() NOT NULL,
  * 		SectionId varchar(),
  * 		Year varchar(),
  * 		Term varchar(),

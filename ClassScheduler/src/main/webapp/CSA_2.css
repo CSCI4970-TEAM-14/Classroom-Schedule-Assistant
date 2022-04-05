@@ -52,13 +52,13 @@ button:hover {
 }
 
 
-span.psw {
+span.pws{
   float: right;
   padding-top: 16px;
 }
 
 @media screen and (max-width: 300px) {
-  span.psw {
+  span.pws {
      display: block;
      float: none;
   }

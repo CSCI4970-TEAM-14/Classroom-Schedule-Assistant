@@ -85,14 +85,14 @@ public class UtilSection extends Hibernate {
 
 
 	//add Section
-	public static boolean addSection(String Id, String type, String method, String instructor, String term, String enroll, String meeting, String room, String courseId) {
+	public static boolean addSection(String Id, String courseId, String type, String method, String enroll, String room, String instructor, String meeting,String term) {
 		Session session = getSessionFactory().openSession();
 		boolean result = true;
 		Transaction transaction = null;
 		
 		try {
 			transaction = session.beginTransaction();
-			session.save(new Section(Id, type, method, instructor, term, enroll, meeting, room, courseId));
+			session.save(new Section(Id, courseId, type, method, enroll, room, instructor, meeting, term));
 			transaction.commit();
 		} catch (HibernateException e) {
 			result = false;

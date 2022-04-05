@@ -37,22 +37,22 @@
 			<%if (session != null){
 					session.invalidate();} %>
 
-	<form action="./Login" method="POST">
+	<form action="./Register" method="POST">
 		<div class="imgcontainer">
 			<i class="glyphicon glyphicon-user"></i>
 		</div>
 
 		<div class="container">
-			<label for="uname"><b>UserId</b></label> 
-			<input type="text" placeholder="" name="uname" required>
+			<label for="UserId"><b>UserId</b></label> 
+			<input type="text" placeholder="" name="UserId" required>
 			<label for="fname"><b>Firstname</b></label>
 			<input type="text" placeholder="" name="fname" required> 
 			<label for="lname"><b>Lastname</b></label>
 			<input type="text" placeholder="" name="lname" required>
 			<label for="email"><b>Email</b></label>
 			<input type="text" placeholder="" name="email" required>
-			<label	for="psw"><b>Password</b></label>
-			<input type="password" placeholder="" name="psw" required>
+			<label	for="pwd"><b>Password</b></label>
+			<input type="password" placeholder="" name="pwd" required>
 
 			<button type="submit" style="color: white">Register</button>
 		</div>
