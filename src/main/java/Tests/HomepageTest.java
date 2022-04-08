@@ -1,5 +1,11 @@
 package Tests;
 
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+//import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.chrome.ChromeDriver;
 //import java.util.List;
 
 import org.junit.AfterClass;
@@ -7,16 +13,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-//import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+
 
 public class HomepageTest {
    private static WebDriver driver;
 
    private static String chromePath = "/ClassScheduler/WebContent/chromedriver.exe";
- 
    private static String systemPath = HomepageTest.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm().replace("file:/", "").replace("ClassScheduler/build/classes/", "").replace("%20", " ");
 	
    @BeforeClass

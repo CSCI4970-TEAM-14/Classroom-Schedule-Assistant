@@ -39,9 +39,9 @@
 			
 			<div class="container">
 				<label for="UserId"><b>UserId</b></label> <input type="text"
-					placeholder="Enter UserId" name="UserId" required> <label
+					placeholder="Enter UserId" id="UserId" name="UserId" required> <label
 					for="pwd"><b>Password</b></label> <input type="password"
-					placeholder="Enter Password" name="pwd" required>
+					placeholder="Enter Password" id = "pwd" name="pwd" required>
 
 				<button type="submit" style="color: white">Login</button>
 			</div>
