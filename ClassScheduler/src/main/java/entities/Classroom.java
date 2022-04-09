@@ -3,6 +3,7 @@ package entities;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,7 +13,7 @@ import javax.persistence.Table;
  * 		type varchar(100) NOT NULL,
  * 		building VARCHAR (10),
  *      seat varchar() NOT NULL,
- *      Computers varchar(),
+ *      computers varchar(),
  *      FOREIGN KEY(building) REFRENCES Building(ID),
  * 		PRIMARY KEY (Id));
  */
@@ -23,8 +24,9 @@ public class Classroom implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "Id")
-	private String Id;
+	@GeneratedValue
+	@Column(name = "id")
+	private String id;
 
 	@Column(name = "type")
 	private String type;
@@ -41,26 +43,26 @@ public class Classroom implements Serializable{
 	public Classroom() {
 	}
 
-	public Classroom(String Id, String type, String building, String seat, String computers) {
-		this.Id = Id;
+	public Classroom(String id, String type, String building, String seat, String computers) {
+		this.id = id;
 		this.type = type;
 		this.building = building;
 		this.seat = seat;
 		this.computers = computers;
 	}
 	
-	public Classroom(String Id, String building, String seat) {
-		this.Id = Id;
+	public Classroom(String id, String building, String seat) {
+		this.id = id;
 		this.building = building;
 		this.seat = seat;
 	}
 	
 	public String getId() {
-		return Id;
+		return id;
 	}
 
-	public void setId(String Id) {
-		this.Id = Id;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getType() {
@@ -89,6 +91,11 @@ public class Classroom implements Serializable{
 
 	public void setComputers(String computers) {
 		this.computers = computers;
+	}
+
+	public void setBuilding(String building) {
+		this.building = building;
+		
 	}
 
 }

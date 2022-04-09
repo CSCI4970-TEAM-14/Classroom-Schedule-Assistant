@@ -7,9 +7,12 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 //import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Restrictions;
 
+import entities.Account;
 //import entities.Classroom;
 import entities.Course;
+//import entities.Schedule;
 
 public class UtilCourse extends Hibernate {
 
@@ -37,6 +40,33 @@ public class UtilCourse extends Hibernate {
 		}
 		return resultList;
 	}
+	
+	public static List<Account> listAccounts(String keyword) {
+	      List<Account> resultList = new ArrayList<Account>();
+
+	      Session session = getSessionFactory().openSession();
+	      Transaction tx = null;
+
+	      try {
+	         tx = session.beginTransaction();
+	         System.out.println((Account)session.get(Account.class, 1)); 
+	         List<?> accs = session.createQuery("FROM Account").list();
+	         for (Iterator<?> iterator = accs.iterator(); iterator.hasNext();) {
+	            Account ant = (Account) iterator.next();
+	            if (ant.getFirstName().startsWith(keyword)) {
+	               resultList.add(ant);
+	            }
+	         }
+	         tx.commit();
+	      } catch (HibernateException e) {
+	         if (tx != null)
+	            tx.rollback();
+	         e.printStackTrace();
+	      } finally {
+	         session.close();
+	      }
+	      return resultList;
+	   }
 
 	//get Course with specified ID
 	public static Course getCourse(String Id) {
@@ -83,6 +113,52 @@ public class UtilCourse extends Hibernate {
 		}
 		return result;
 	}
+	
+	public static List <Course> getCourseByTitle() {
+		List<Course> resultList = new ArrayList<Course>();
+		Session session = getSessionFactory().openSession();
+		Transaction transaction = null;
+		String title = null;
+
+		try {
+			transaction = session.beginTransaction();
+			List<?> course = session.createCriteria(Course.class).add(Restrictions.eq("title", title)).list();
+			for (Iterator<?> iterator = course.iterator(); iterator.hasNext();) {
+				Course c = (Course) iterator.next();
+				resultList.add(c);
+			}
+			transaction.commit();
+		} catch (HibernateException e) {
+			if (transaction != null)
+				transaction.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return resultList;
+	}
+	
+
+	public void saveCourse(Course c) { //static
+		
+		Transaction transaction = null;
+		//boolean result = true;
+		Session session = getSessionFactory().openSession();
+		try  {
+			// start a transaction
+			transaction = session.beginTransaction();
+			session.save(c);
+			System.out.println("Object saved successfully.....!!");
+			// commit transaction
+			transaction.commit();
+		} catch (HibernateException e) {
+			if (transaction != null)
+				transaction.rollback();
+				e.printStackTrace();
+			}finally {
+				session.close();
+			}
+		}
 	
 	public static boolean removeCourse(String Id) {
 

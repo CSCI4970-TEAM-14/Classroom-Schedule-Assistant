@@ -58,6 +58,18 @@
                 </div>
             </div>
         </nav>
+        <%if (session.getAttribute("failed") != null){
+                session.setAttribute("failed", null); %>
+                <p style="color:red"><i>..Failed to Adjust Classroom Capacity!..</i></p>
+                <% } %>
+
+                    <%if (session.getAttribute("ajusted") != null){
+                        session.setAttribute("adjusted", null); %>
+                        <p style="color:green"><i>..Classroom Adjusted!..</i></p>
+                        <% } %>
+                        
+                        <%if (session != null){
+						session.invalidate();} %>
         <article>
             <form action="./adjustCapacity" method="post">
                 <div class="container">

@@ -2,7 +2,6 @@
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Add Classroom</title>
     <meta charset="utf-8">
@@ -53,6 +52,26 @@
             </div>
         </nav>
         <article>
+        <%
+    		if (session.getAttribute("Failed") != null) {
+    			session.setAttribute("Failed", null);
+    		%>
+    			<p style="color:red">**Classroom not added!**</p>
+    		<%
+    		}
+    		%>
+    		<%
+    		if (session.getAttribute("Added") != null) {
+    			session.setAttribute("Added", null);
+    		%>
+    			<p style="color:green">**Added Classroom!**</p>
+    		<%
+    		}
+    		%>
+						
+			<%if (session != null){
+					session.invalidate();} %>
+					 
             <form action="./addRoom" method="post">
                 <div class="container">
                     <label for="room"><b>Room number</b></label>

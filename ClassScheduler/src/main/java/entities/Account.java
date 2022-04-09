@@ -3,14 +3,17 @@ package entities;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+//import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
  * CREATE TABLE Account 
- * (	id varchar() NOT NULL,
- * 		firstName varchar(),
- * 		lastName varchar(),
+ * (	id varchar(50) NOT NULL Auto_increment,
+ * 		username varchar(45),
+ * 		firstname varchar(),
+ * 		lastname varchar(),
  * 		email varchar(),
  * 		password varchar(),
  * 		PRIMARY KEY (id));
@@ -21,54 +24,75 @@ import javax.persistence.Table;
 public class Account implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+	
+	 @Id
+	 @GeneratedValue
+	 @Column(name = "id")
+	 private Integer id;
+ 
+	@Column(name = "username")
+	private String username;
 
-	@Id
-	@Column(name = "id")
-	private String id;
+	@Column(name = "firstname")
+	private String firstname;
 
-	@Column(name = "firstName")
-	private String firstName;
-
-	@Column(name = "lastName")
-	private String lastName;
+	@Column(name = "lastname")
+	private String lastname;
 
 	@Column(name = "email")
 	private String email;
 
 	@Column(name = "password")
 	private String password;
+		
 
+	public Account() {
 
-	public Account(String id, String firstName, String lastName,String email, String password) {
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
+	}
+
+	public Account(String userName, String firstName, String lastName,String email, String password) {
+		this.username = userName;
+		this.firstname = firstName;
+		this.lastname = lastName;
 		this.email = email;
 		this.password = password;
 	}
-
-	public String getId() {
+	
+	public Account(String userName, String password) {
+		this.username = userName;
+		this.password = password;
+	}
+	
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
+	public String getUserName() {
+		return username;
+	}
+
+	public void setUserName(String userName) {
+		this.username = userName;
+	}
+
 	public String getFirstName() {
-		return firstName;
+		return firstname;
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.firstname = firstName;
 	}
 
 	public String getLastName() {
-		return lastName;
+		return lastname;
 	}
 
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastname = lastName;
 	}
 
 	public String getEmail() {

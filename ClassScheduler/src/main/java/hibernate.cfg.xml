@@ -14,6 +14,7 @@
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<!-- True you will see sql in console -->
 		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
 		<mapping class="entities.Account" />
 		<mapping class="entities.Classroom"/>
 		<mapping class="entities.Building" />
@@ -23,5 +24,6 @@
 		<mapping class="entities.Section" />
 		<mapping class="entities.Schedule"/>
 		<mapping class="entities.Instructor" />
+		<mapping class="servlets.displayTable"/>
 	</session-factory>
 </hibernate-configuration>

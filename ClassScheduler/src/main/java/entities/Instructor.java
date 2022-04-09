@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 /**
  * CREATE TABLE Instructor 
- * (	Id INT NOT NULL,
+ * (	id varchar(50) NOT NULL,
  * 		First varchar(100),
  * 		Last varchar(100),
  * 		Department varchar(),
@@ -23,8 +23,8 @@ public class Instructor implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "Id")
-	private int Id;
+	@Column(name = "id")
+	private String id;
 
 	@Column(name = "First")
 	private String firstName;
@@ -38,19 +38,19 @@ public class Instructor implements Serializable{
 	public Instructor() {
 	}
 
-	public Instructor(int Id, String firstName, String lastName, String dept) {
-		this.Id = Id;
+	public Instructor(String id, String firstName, String lastName, String dept) {
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.departmentId = dept;
 	}
 
-	public int getId() {
-		return Id;
+	public String getId() {
+		return id;
 	}
 
-	public void setId(int Id) {
-		this.Id = Id;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getFirstName() {

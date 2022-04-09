@@ -8,6 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 //import org.hibernate.criterion.Restrictions;
 
+import entities.Account;
+//import entities.Schedule;
 //import entities.Classroom;
 import entities.Section;
 
@@ -37,6 +39,33 @@ public class UtilSection extends Hibernate {
 		}
 		return resultList;
 	}
+	
+	public static List<Section> listSections(String keyword) {
+	      List<Section> resultList = new ArrayList<Section>();
+
+	      Session session = getSessionFactory().openSession();
+	      Transaction tx = null;
+
+	      try {
+	         tx = session.beginTransaction();
+	         System.out.println((Account)session.get(Section.class, 1)); 
+	         List<?> accs = session.createQuery("FROM Section").list();
+	         for (Iterator<?> iterator = accs.iterator(); iterator.hasNext();) {
+	            Section ant = (Section) iterator.next();
+	            if (ant.getId().startsWith(keyword)) {
+	               resultList.add(ant);
+	            }
+	         }
+	         tx.commit();
+	      } catch (HibernateException e) {
+	         if (tx != null)
+	            tx.rollback();
+	         e.printStackTrace();
+	      } finally {
+	         session.close();
+	      }
+	      return resultList;
+	   }
 
 	//get Section with specified ID
 	public static Section getSection(String Id) {
@@ -108,6 +137,28 @@ public class UtilSection extends Hibernate {
 			session.close();
 		}
 		return result;
+	}
+	
+	//add
+	public void saveSection(Section sec) { //static
+		
+		Transaction transaction = null;
+		//boolean result = true;
+		Session session = getSessionFactory().openSession();
+		try  {
+			// start a transaction
+			transaction = session.beginTransaction();
+			session.save(sec);
+			System.out.println("Object saved successfully.....!!");
+			// commit transaction
+			transaction.commit();
+		} catch (HibernateException e) {
+			if (transaction != null)
+				transaction.rollback();
+				e.printStackTrace();
+			}finally {
+				session.close();
+			}
 	}
 	
 	public static boolean removeSection(String Id) {

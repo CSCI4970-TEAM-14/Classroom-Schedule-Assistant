@@ -20,9 +20,11 @@
     <div class="topnav">
         <a href="userHome.jsp">Home</a>
         <a href="addRoom.jsp">Add Classrooms</a>
-        <a href="updateClass.jsp">Update Classrooms</a>
-        <a href="scheduler.jsp">Scheduler</a>
+        <a href="addSchedule.jsp">Add Schedules</a>
+        <a href="addSection.jsp">Add Sections</a>
         <a href="adjust.jsp">Adjust Capacity</a>
+        <a href="updateRoom.jsp">Update Classrooms</a>
+        <a href="scheduler.jsp">Scheduler</a>
     </div>
 
 

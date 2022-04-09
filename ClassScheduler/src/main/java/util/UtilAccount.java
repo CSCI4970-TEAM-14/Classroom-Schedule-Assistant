@@ -6,16 +6,15 @@ import java.util.Iterator;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-//import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Restrictions;
 
 import entities.Account;
 
 public class UtilAccount extends Hibernate {
 
-	//get all accounts
 	public static List<Account> listAccounts() {
 		
-		List<Account> resultList = new ArrayList<Account>(); //null?
+		List<Account> resultList = new ArrayList<Account>(); 
 		Session session = getSessionFactory().openSession();
 		Transaction transaction = null; 
 
@@ -36,9 +35,36 @@ public class UtilAccount extends Hibernate {
 		}
 		return resultList;
 	}
+	
+	public static List<Account> listAccounts(String keyword) {
+	      List<Account> resultList = new ArrayList<Account>();
 
-	//get account with username
-	public static Account getAccount(String Id) {
+	      Session session = getSessionFactory().openSession();
+	      Transaction tx = null;
+
+	      try {
+	         tx = session.beginTransaction();
+	         System.out.println((Account)session.get(Account.class, 1)); 
+	         List<?> accs = session.createQuery("FROM Account").list();
+	         for (Iterator<?> iterator = accs.iterator(); iterator.hasNext();) {
+	            Account ant = (Account) iterator.next();
+	            if (ant.getFirstName().startsWith(keyword)) {
+	               resultList.add(ant);
+	            }
+	         }
+	         tx.commit();
+	      } catch (HibernateException e) {
+	         if (tx != null)
+	            tx.rollback();
+	         e.printStackTrace();
+	      } finally {
+	         session.close();
+	      }
+	      return resultList;
+	   }
+
+
+	public static Account getAccount(String username) {
 		
 		Account account = null;
 		Session session = getSessionFactory().openSession();
@@ -47,7 +73,7 @@ public class UtilAccount extends Hibernate {
 		try {
 
 			transaction = session.beginTransaction();
-			account = (Account) session.get(Account.class, Id);
+			account = (Account) session.createCriteria(Account.class).add(Restrictions.eq("username", username)).uniqueResult();
 			transaction.commit();
 		} catch (HibernateException e) {
 			if (transaction != null)
@@ -56,22 +82,23 @@ public class UtilAccount extends Hibernate {
 		} finally {
 			session.close();
 		}
+		 //System.out.println("User's Name :" + account.getFirstName());
 		return account;
 	}
 
 	//validate username
-	public boolean validate(String userId, String password) {
+	public boolean validate(String username, String password) {
 
 		Transaction transaction = null;
 		Session session = getSessionFactory().openSession();
 		Account acc = null;
-		boolean result = true;
+		//boolean result = true;
 
 		try {
 			// start a transaction
 			transaction = session.beginTransaction();
 			
-			acc = (Account) session.createQuery("FROM Account a WHERE a.id = :userId").setParameter("userId", userId).uniqueResult();
+			acc = (Account) session.createQuery("FROM Account A WHERE A.username = :username").setParameter("username", username).uniqueResult();
 
 			if (acc != null && acc.getPassword().equals(password)) {
 				return true;
@@ -79,18 +106,17 @@ public class UtilAccount extends Hibernate {
 			// commit transaction
 			transaction.commit();
 		} catch (HibernateException e) {
-			result = false;
+			//result = false;
 			if (transaction != null) 
 				transaction.rollback();
 			e.printStackTrace();
 			} finally {
 				session.close();
 			}
-		return result;
+		return false;
 	}
 
-	//create a new account
-	public static boolean createAccount(String id, String firstName, String lastName, String email, String password) {
+	public static boolean createAccounts(String username, String firstName, String lastName, String email, String password) {
 		
 		Session session = getSessionFactory().openSession();
 		boolean result = true;
@@ -98,7 +124,7 @@ public class UtilAccount extends Hibernate {
 		
 		try {
 			transaction = session.beginTransaction();
-			session.save(new Account(id, firstName, lastName, email, password));
+			session.save(new Account(username, firstName, lastName, email, password));
 			System.out.println("Object saved successfully.....!!");
 			transaction.commit();
 		} catch (HibernateException e) {
@@ -111,14 +137,29 @@ public class UtilAccount extends Hibernate {
 		}
 		return result;
 	}
+	
+	public static void createAccount(String username, String firstname, String lastname, String email, String password) {
+	      Session session = getSessionFactory().openSession();
+	      Transaction tx = null;
+	      try {
+	         tx = session.beginTransaction();
+	         session.save(new Account(username, firstname, lastname, email, password));
+	         tx.commit();
+	      } catch (HibernateException e) {
+	         if (tx != null)
+	            tx.rollback();
+	         e.printStackTrace();
+	      } finally {
+	         session.close();
+	      }
+	   }
 
 
-	public static boolean saveAccount(Account acc) {
+	public void saveAccount(Account acc) { //static
 		
 		Transaction transaction = null;
-		boolean result = true;
+		//boolean result = true;
 		Session session = getSessionFactory().openSession();
-
 		try  {
 			// start a transaction
 			transaction = session.beginTransaction();
@@ -126,14 +167,14 @@ public class UtilAccount extends Hibernate {
 			System.out.println("Object saved successfully.....!!");
 			// commit transaction
 			transaction.commit();
-		} catch (Exception e) {
-			result = false;
-			if (transaction != null) {
+		} catch (HibernateException e) {
+			if (transaction != null)
 				transaction.rollback();
+				e.printStackTrace();
+			}finally {
+				session.close();
 			}
-			e.printStackTrace();
-		}
-		return result;
+		//return acc ;
 	}
 
 }

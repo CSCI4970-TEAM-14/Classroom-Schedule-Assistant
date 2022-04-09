@@ -1,7 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-//import javax.servlet.RequestDispatcher;
+//import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import util.UtilAccount;
 import entities.Account;
+import util.UtilAccount;
 
 @WebServlet("/Register")
 public class Register extends HttpServlet {
@@ -20,51 +20,43 @@ public class Register extends HttpServlet {
 	       super();
 	    }
 	 
-	 protected void doGet(HttpServletRequest request, HttpServletResponse response)
-				throws ServletException, IOException {
-				
-			response.sendRedirect("register.jsp");
-	}
-	
-	private void register(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		
-		HttpSession session = request.getSession();
-
-		String id = request.getParameter("id");
-		String firstName = request.getParameter("firstName");
-		String lastName = request.getParameter("lastName");
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		
-				
-		System.out.println("Entered:" + id + "," + firstName + "," + email);
-		
-		Account acc = new Account(id, firstName, lastName, email, password);
-		acc.setId(id);
-		acc.setFirstName(firstName);
-		acc.setLastName(lastName);
-		acc.setEmail(email);
-		acc.setPassword(password);
-		
-		UtilAccount.createAccount(id,firstName,lastName,email,password);//?
-		
-		if(UtilAccount.getAccount(id) != null) {
-			session.setAttribute("inUse", "true");
-			response.sendRedirect("register.jsp");
+	 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+					      
+		 HttpSession session = request.getSession();
 			
-		} else if(!UtilAccount.createAccount(id,firstName,lastName,email,password)) {
-			session.setAttribute("Failed", "true");
-			response.sendRedirect("register.jsp");
+			String user = request.getParameter("user");
+			String firstName = request.getParameter("first");
+			String lastName = request.getParameter("last");
+			String email = request.getParameter("email");
+			String password = request.getParameter("password");
 			
-		} else {
-			session.setAttribute("userAcc", UtilAccount.getAccount(id));
-			response.sendRedirect("login.jsp");
+			Account acc = new Account();
+			UtilAccount u = new UtilAccount();
+			
+			acc.setUserName(user);
+			acc.setFirstName(firstName);
+			acc.setLastName(lastName);
+			acc.setEmail(email);
+			acc.setPassword(password);
+			
+			u.saveAccount(acc);
+			
+			if (UtilAccount.getAccount(user) != null) {
+				session.setAttribute("inUse", "true");
+				response.sendRedirect("register.jsp");
+			}
+			else if (!UtilAccount.createAccounts(user, firstName, lastName, email, password)) {
+				session.setAttribute("notCreated", "true");
+				response.sendRedirect("userHome.jsp?name="+firstName);
+			}
+			else {
+				u.saveAccount(acc);
+				session.setAttribute("account", UtilAccount.getAccount(user));
+				response.sendRedirect("userHome.jsp?name=" +firstName);
+			}
+		   }
+		
+		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			doGet(request, response);
 		}
-
-  }
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		register(request, response);
-	}
 }

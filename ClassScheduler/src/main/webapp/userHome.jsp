@@ -26,13 +26,14 @@
 
     <section>
     <%Account acc = null; %>
-        <h1>Welcome <%= request.getParameter("name") %>!</h1>
+        <h1>Welcome!</h1>
         <nav>
             <ul>
                 <div class="relative">
                  <li class="b"><a href="update.jsp" style="color: white">Update </a></li>
-                    <li class="b"><a href="userHome.jsp" style="color: white">Add</a></li>
+                    <li class="b"><a href="addSchedule.jsp" style="color: white">Add</a></li>
                     <li class="b"><a href="userHome.jsp" style="color: white">Remove</a></li>
+                    <li class="b"><a href="export.jsp" style="color: white">Export</a></li>
                 </div>
             </ul>
         </nav>

@@ -8,7 +8,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 //import org.hibernate.criterion.Restrictions;
 
-//import entities.Classroom;
 import entities.Enrollment;
 
 public class UtilEnrollment extends Hibernate{
@@ -31,6 +30,33 @@ public class UtilEnrollment extends Hibernate{
 		} catch (HibernateException e) {
 			if (transaction != null)
 				transaction.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return resultList;
+	}
+	
+	public static List<Enrollment> listEnroll(String keyword) {
+		List<Enrollment> resultList = new ArrayList<Enrollment>();
+
+		Session session = getSessionFactory().openSession();
+		Transaction tx = null;
+
+		try {
+			tx = session.beginTransaction();
+			System.out.println((Enrollment) session.get(Enrollment.class, 1));
+			List<?> accs = session.createQuery("FROM Enrollment").list();
+			for (Iterator<?> iterator = accs.iterator(); iterator.hasNext();) {
+				Enrollment en = (Enrollment) iterator.next();
+				if (en.getSection().startsWith(keyword)) {
+					resultList.add(en);
+				}
+			}
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
 			e.printStackTrace();
 		} finally {
 			session.close();

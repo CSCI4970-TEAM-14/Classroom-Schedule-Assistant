@@ -7,8 +7,9 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 //import org.hibernate.criterion.Restrictions;
-
+import org.hibernate.criterion.Restrictions;
 import entities.Classroom;
+
 
 public class UtilClass extends Hibernate {
 
@@ -36,9 +37,58 @@ public class UtilClass extends Hibernate {
 		}
 		return resultList;
 	}
+	
+	public static List<Classroom> listClass(String keyword) {
+		
+	      List<Classroom> resultList = new ArrayList<Classroom>();
+	      Session session = getSessionFactory().openSession();
+	      Transaction tx = null;
+	      try {
+	         tx = session.beginTransaction();
+	         System.out.println((Classroom)session.get(Classroom.class, 1)); 
+	         List<?> accs = session.createQuery("FROM Classroom").list();
+	         for (Iterator<?> iterator = accs.iterator(); iterator.hasNext();) {
+	            Classroom ant = (Classroom) iterator.next();
+	            if (ant.getId().startsWith(keyword)) {
+	               resultList.add(ant);
+	            }
+	         }
+	         tx.commit();
+	      } catch (HibernateException e) {
+	         if (tx != null)
+	            tx.rollback();
+	         e.printStackTrace();
+	      } finally {
+	         session.close();
+	      }
+	      return resultList;
+	   }
+	
+	public static List<Classroom> getClassById() {
+		List<Classroom> resultList = new ArrayList<Classroom>();
+		Session session = getSessionFactory().openSession();
+		Transaction transaction = null;
+		String id = null;
+		try {
+			transaction = session.beginTransaction();
+			List<?> c = session.createCriteria(Classroom.class).add(Restrictions.eq("id", id)).list();
+			for (Iterator<?> iterator = c.iterator(); iterator.hasNext();) {
+				Classroom sh = (Classroom) iterator.next();
+				resultList.add(sh);
+			}
+			transaction.commit();
+		} catch (HibernateException e) {
+			if (transaction != null)
+				transaction.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return resultList;
+	}
 
 	//get classroom with specified number
-	public Classroom getClass(String Id) {
+	public Classroom getClass(String Id, String building) {
 
 		Classroom classroom = null;
 		Session session = getSessionFactory().openSession();
@@ -58,6 +108,26 @@ public class UtilClass extends Hibernate {
 		return classroom;
 	}
 
+	//get classroom by Room
+	public Classroom getRoom(String Id) {
+
+		Classroom classroom = null;
+		Session session = getSessionFactory().openSession();
+		Transaction transaction = null;
+
+		try {
+			transaction = session.beginTransaction();
+			classroom = (Classroom) session.get(Classroom.class, Id);
+			transaction.commit();
+		} catch (HibernateException e) {;
+		if (transaction != null)
+			transaction.rollback();
+		e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return classroom;
+	}
 	//add Classroom
 	public static boolean addClassroom(String Id, String type, String building, String seats, String computers) {
 
@@ -107,11 +177,31 @@ public class UtilClass extends Hibernate {
 		return result;
 
 	}
-
-	public static boolean updateClass(Classroom room) {
+	
+	//add classroom
+	public void saveClass(Classroom cl) { // static
 
 		Transaction transaction = null;
-		boolean result = true;
+		Session session = getSessionFactory().openSession();
+		try {
+			transaction = session.beginTransaction();
+			session.save(cl);
+			System.out.println("Object saved successfully.....!!");
+			// commit transaction
+			transaction.commit();
+		} catch (HibernateException e) {
+			if (transaction != null)
+				transaction.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+
+	public void updateClass(Classroom room) { //static
+
+		Transaction transaction = null;
+		//boolean result = true;
 		Session session = getSessionFactory().openSession();
 
 		try{
@@ -122,12 +212,13 @@ public class UtilClass extends Hibernate {
 			// commit transaction
 			transaction.commit();
 		} catch (Exception e) {
-			if (transaction != null) {
+			if (transaction != null) 
 				transaction.rollback();
-			}
 			e.printStackTrace();
-		}
-		return result;
+			}finally {
+				session.close();
+			}
+		//return result;
 	}
 
 	public static boolean updateCapacity(String roomId, String seats) {

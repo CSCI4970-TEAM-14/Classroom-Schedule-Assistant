@@ -8,10 +8,10 @@ import javax.persistence.Table;
 
 /**
  * CREATE TABLE Enrollment 
- * (	Seat varchar() NOT NULL,
- * 		SectionId varchar(),
- * 		Year varchar(),
- * 		Term varchar(),
+ * (	seat varchar() NOT NULL,
+ * 		sectionId varchar(),
+ * 		year varchar(),
+ * 		term varchar(),
  * 		FOREIGN KEY(sectionId) REFERENCES Section(ID),
  * 		PRIMARY KEY (seats));
  */
@@ -23,7 +23,7 @@ public class Enrollment implements Serializable{
 
 	@Id
 	@Column(name = "seats")
-	private String seats;
+	private String seat;
 	
 	@Column(name = "sectionId")
 	private String sectionId;
@@ -37,19 +37,19 @@ public class Enrollment implements Serializable{
 	public Enrollment() {
 	} 
 
-	public Enrollment(String seats, String section,String year, String term) {
-		this.seats = seats;
+	public Enrollment(String seat, String section,String year, String term) {
+		this.seat = seat;
 		this.sectionId = section;
 		this.year = year;
 		this.term = term;
 	}
 
 	public String getSeats() {
-		return seats;
+		return seat;
 	}
 
-	public void setSeats(String seats) {
-		this.seats = seats;
+	public void setSeats(String seat) {
+		this.seat = seat;
 	}
 
 	public String getYear() {

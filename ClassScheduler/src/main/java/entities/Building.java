@@ -9,7 +9,7 @@ import javax.persistence.Table;
 /**
  * CREATE TABLE Building 
  * (	code varchar(10) NOT NULL, 
- * 		Name varchar(100),
+ * 		name varchar(100),
  * 		PRIMARY KEY (code));
  */
 @Entity
@@ -19,18 +19,18 @@ public class Building implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "cone")
+	@Column(name = "code")
 	private String code;
 
-	@Column(name = "Name")
-	private String Name;
+	@Column(name = "name")
+	private String name;
 
 	public Building() {
 	}
 
-	public Building(String code, String Name) {
+	public Building(String code, String name) {
 		this.code = code;
-		this.Name = Name;
+		this.name = name;
 	}
 
 	public String getCode() {
@@ -42,11 +42,11 @@ public class Building implements Serializable{
 	}
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
-	public void setName(String Name) {
-		this.Name = Name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

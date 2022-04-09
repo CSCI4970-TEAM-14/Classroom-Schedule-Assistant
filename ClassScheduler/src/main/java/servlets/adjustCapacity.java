@@ -3,7 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.sql.SQLException;
 //import java.util.List;
-import javax.servlet.RequestDispatcher;
+//import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +18,7 @@ import entities.Classroom;
 public class adjustCapacity extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private UtilClass Uclass;
-    private Classroom cRoom;
+    private Classroom c;
 
 
     public void init(){
@@ -47,20 +47,23 @@ public class adjustCapacity extends HttpServlet {
     	
     	HttpSession session = request.getSession();
 
-        String roomNum = request.getParameter("roomNumber");
-		String building = request.getParameter("building");
+        String roomNum = request.getParameter(c.getId());
+		String building = request.getParameter(c.getBuilding());
 		String seats = request.getParameter("seats");
-		String seat = cRoom.getSeat();
+		//String seat = c.getSeat();
 		
-		Classroom rm = new Classroom(roomNum, building, seats);
+		Classroom rm = new Classroom();
+		rm.setSeats(seats);
+		rm.setId(roomNum);
+		rm.setBuilding(building);
+		Uclass.updateClass(rm);
        
-        if(Uclass.getClass(seat) != null) {
-        	UtilClass.updateClass(rm);
-        	RequestDispatcher dispatcher = request.getRequestDispatcher("update.jsp");
-			dispatcher.forward(request, response);
+        if(Uclass.getClass(roomNum, building) != null) {
+        	session.setAttribute("adjusted", "true");
+			response.sendRedirect("adjust.jsp");
         } 
         else {
-        	session.setAttribute("failed", "true");
+        	session.setAttribute("failed", "false");
 			response.sendRedirect("adjust.jsp");
            }        
     }

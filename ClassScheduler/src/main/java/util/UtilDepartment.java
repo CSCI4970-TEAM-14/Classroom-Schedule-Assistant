@@ -7,7 +7,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 //import org.hibernate.criterion.Restrictions;
-
 import entities.Department;
 
 public class UtilDepartment extends Hibernate{
@@ -36,6 +35,33 @@ public class UtilDepartment extends Hibernate{
 		}
 		return resultList;
 	}
+	
+	public static List<Department> listDepartments(String keyword) {
+	      List<Department> resultList = new ArrayList<Department>();
+
+	      Session session = getSessionFactory().openSession();
+	      Transaction tx = null;
+
+	      try {
+	         tx = session.beginTransaction();
+	         System.out.println((Department)session.get(Department.class, 1)); 
+	         List<?> accs = session.createQuery("FROM Department").list();
+	         for (Iterator<?> iterator = accs.iterator(); iterator.hasNext();) {
+	            Department ant = (Department) iterator.next();
+	            if (ant.getName().startsWith(keyword)) {
+	               resultList.add(ant);
+	            }
+	         }
+	         tx.commit();
+	      } catch (HibernateException e) {
+	         if (tx != null)
+	            tx.rollback();
+	         e.printStackTrace();
+	      } finally {
+	         session.close();
+	      }
+	      return resultList;
+	   }
 
 	//get Department with specified code
 	public static Department getDepartment(String code) {

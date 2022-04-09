@@ -7,9 +7,10 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 //import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Restrictions;
 
-//import entities.Classroom;
 import entities.Instructor;
+import entities.Schedule;
 
 public class UtilInstructor extends Hibernate{
 
@@ -37,9 +38,36 @@ public class UtilInstructor extends Hibernate{
 		}
 		return resultList;
 	}
+	
+	public static List<Instructor> listInstructors(String keyword) {
+	      List<Instructor> resultList = new ArrayList<Instructor>();
+
+	      Session session = getSessionFactory().openSession();
+	      Transaction tx = null;
+
+	      try {
+	         tx = session.beginTransaction();
+	         System.out.println((Instructor)session.get(Instructor.class, 1)); 
+	         List<?> accs = session.createQuery("FROM Instructor").list();
+	         for (Iterator<?> iterator = accs.iterator(); iterator.hasNext();) {
+	            Instructor in = (Instructor) iterator.next();
+	            if (in.getFirstName().startsWith(keyword)) {
+	               resultList.add(in);
+	            }
+	         }
+	         tx.commit();
+	      } catch (HibernateException e) {
+	         if (tx != null)
+	            tx.rollback();
+	         e.printStackTrace();
+	      } finally {
+	         session.close();
+	      }
+	      return resultList;
+	   }
 
 	//get Instructor with specified ID
-	public static Instructor getInstructor(Integer Id) {
+	public static Instructor getInstructor(String id) {
 		
 		Instructor instructor = null;
 		Session session = getSessionFactory().openSession();
@@ -47,7 +75,7 @@ public class UtilInstructor extends Hibernate{
 
 		try {
 			transaction = session.beginTransaction();
-			instructor = (Instructor) session.get(Instructor.class, Id);
+			instructor = (Instructor) session.get(Instructor.class, id);
 			transaction.commit();
 		} catch (HibernateException e) {
 			if (transaction != null)
@@ -64,7 +92,7 @@ public class UtilInstructor extends Hibernate{
 	}
 
 	//add Instructor
-	public static boolean addInstructor(Integer Id, String firstName, String lastName, String dept) {
+	public static boolean addInstructor(String id, String firstName, String lastName, String dept) {
 		
 		Session session = getSessionFactory().openSession();
 		boolean result = true;
@@ -72,7 +100,7 @@ public class UtilInstructor extends Hibernate{
 		
 		try {
 			transaction = session.beginTransaction();
-			session.save(new Instructor(Id, firstName, lastName, dept));
+			session.save(new Instructor(id, firstName, lastName, dept));
 			transaction.commit();
 		} catch (HibernateException e) {
 			result = false;
@@ -90,7 +118,54 @@ public class UtilInstructor extends Hibernate{
 		return result;
 	}
 	
-	public static boolean removeInstructor(Integer Id) {
+	//add
+	public void saveInstructor(Instructor in) { //static
+		
+		Transaction transaction = null;
+		//boolean result = true;
+		Session session = getSessionFactory().openSession();
+		try  {
+			// start a transaction
+			transaction = session.beginTransaction();
+			session.save(in);
+			System.out.println("Object saved successfully.....!!");
+			// commit transaction
+			transaction.commit();
+		} catch (HibernateException e) {
+			if (transaction != null)
+				transaction.rollback();
+				e.printStackTrace();
+			}finally {
+				session.close();
+			}
+		//return acc ;
+	}
+	
+	public static List <Instructor> getInstructorByName() {
+		List<Instructor> resultList = new ArrayList<Instructor>();
+		Session session = getSessionFactory().openSession();
+		Transaction transaction = null;
+		String First = null;
+
+		try {
+			transaction = session.beginTransaction();
+			List<?> in = session.createCriteria(Schedule.class).add(Restrictions.eq("First", First)).list();
+			for (Iterator<?> iterator = in.iterator(); iterator.hasNext();) {
+				Instructor i = (Instructor) iterator.next();
+				resultList.add(i);
+			}
+			transaction.commit();
+		} catch (HibernateException e) {
+			if (transaction != null)
+				transaction.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return resultList;
+	}
+	
+	public static boolean removeInstructor(String id) {
 
 		Instructor in = null;
 		Session session = getSessionFactory().openSession();
@@ -99,7 +174,7 @@ public class UtilInstructor extends Hibernate{
 
 		try {
 			transaction = session.beginTransaction();
-			in = (Instructor) session.get(Instructor.class, Id);
+			in = (Instructor) session.get(Instructor.class, id);
 			session.delete(in);
 			transaction.commit();
 		} catch (HibernateException e) {

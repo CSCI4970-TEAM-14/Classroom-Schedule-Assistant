@@ -22,18 +22,15 @@
 
 	<h2 style="color: red">Account Registration</h2>
 	
-	<%if (session.getAttribute("Failed") != null){
-					session.setAttribute("Failed", null); %>
-					<p><i>..Failed to create account..</i></p>
-			<% } %>
-			
-			
-			<%if (session.getAttribute("inUse") != null){
-					session.setAttribute("inUse", null); %>
-					<p><i>..Account already exists!..</i></p>
-			<% } %>
-			
-			
+			<%
+    		if (session.getAttribute("inUse") != null) {
+    			session.setAttribute("inUse", null);
+    		%>
+    			<p style="color:red">**The username is already in use!**</p>
+    		<%
+    		}
+    		%>
+						
 			<%if (session != null){
 					session.invalidate();} %>
 
@@ -43,16 +40,11 @@
 		</div>
 
 		<div class="container">
-			<label for="UserId"><b>UserId</b></label> 
-			<input type="text" placeholder="" name="UserId" required>
-			<label for="fname"><b>Firstname</b></label>
-			<input type="text" placeholder="" name="fname" required> 
-			<label for="lname"><b>Lastname</b></label>
-			<input type="text" placeholder="" name="lname" required>
-			<label for="email"><b>Email</b></label>
-			<input type="text" placeholder="" name="email" required>
-			<label	for="pwd"><b>Password</b></label>
-			<input type="password" placeholder="" name="pwd" required>
+			<label for="UserId"><b>UserId</b></label> <input type="text" placeholder="" name="UserId" required>
+			<label for="fname"><b>Firstname</b></label>	<input type="text" placeholder="" name="fname" required> 
+			<label for="lname"><b>Lastname</b></label>	<input type="text" placeholder="" name="lname" required>
+			<label for="email"><b>Email</b></label>	<input type="text" placeholder="" name="email" required>
+			<label	for="pwd"><b>Password</b></label><input type="password" placeholder="" name="pwd" required>
 
 			<button type="submit" style="color: white">Register</button>
 		</div>

@@ -23,8 +23,8 @@
 		<h2 style="color: red">Login</h2>
 					
 			
-			<%if (session.getAttribute("Invalid") != null){
-					session.setAttribute("Invalid", null); %>
+			<%if (session.getAttribute("invalid") != null){
+					session.setAttribute("invalid", null); %>
 					<p><i>..Wrong userId or Password! Enter again..</i></p>
 			<% } %>
 			
@@ -38,10 +38,10 @@
 			</div>
 			
 			<div class="container">
-				<label for="UserId"><b>UserId</b></label> <input type="text"
-					placeholder="Enter UserId" name="UserId" required> <label
-					for="pwd"><b>Password</b></label> <input type="password"
-					placeholder="Enter Password" name="pwd" required>
+				<label for="UserId"><b>UserId</b></label>
+				<input type="text"	placeholder="Enter UserId" name="UserId" required>
+			    <label for="pwd"><b>Password</b></label>
+			    <input type="password" placeholder="Enter Password" name="pwd" required>
 
 				<button type="submit" style="color: white">Login</button>
 			</div>

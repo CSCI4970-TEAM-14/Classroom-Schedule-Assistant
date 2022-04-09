@@ -11,6 +11,7 @@ public class Hibernate {
 		if(sessionFactory != null) {
 			return sessionFactory;
 		}
+		//URL resource = Hibernate.class.getResource("hibernate.cfg.xml");
 		Configuration configuration = new Configuration().configure();
 		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
 						.applySettings(configuration.getProperties());

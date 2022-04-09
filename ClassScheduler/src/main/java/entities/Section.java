@@ -31,8 +31,8 @@ public class Section implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "Id")
-	private String Id;
+	@Column(name = "id")
+	private String id;
 
 	@Column(name = "type")
 	private String type;
@@ -40,8 +40,8 @@ public class Section implements Serializable{
 	@Column(name = "method")
 	private String method;
 	
-	@Column(name = "instructor")
-	private String instructor;
+	@Column(name = "instructorId")
+	private String instructorId;
 	
 	@Column(name = "term")
 	private String term;
@@ -61,12 +61,12 @@ public class Section implements Serializable{
 	public Section() {
 	}
 
-	public Section(String Id, String courseId, String type, String method, String enroll, String room, String instructor, String meeting,String term) {
+	public Section(String id, String courseId, String type, String method, String enroll, String room, String instructorId, String meeting,String term) {
 		
-		this.Id = Id;
+		this.id = id;
 		this.type = type;
 		this.method = method;
-		this.instructor = instructor;
+		this.instructorId = instructorId;
 		this.term = term;
 		this.enroll = enroll;
 		this.meeting = meeting;
@@ -76,11 +76,11 @@ public class Section implements Serializable{
 	}
 
 	public String getId() {
-		return Id;
+		return id;
 	}
 
-	public void setId(String Id) {
-		this.Id = Id;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getType() {
@@ -100,7 +100,7 @@ public class Section implements Serializable{
 	}
 		
 	public String getInstructor() {
-			return instructor;
+			return instructorId;
 	}
 
 	public String getTerm() {
@@ -125,6 +125,31 @@ public class Section implements Serializable{
 
 	public String getCourseId() {
 		return courseId;
+	}
+
+	public void setCourseId(String courseId) {
+		this.courseId = courseId;
+		
+	}
+
+	public void setEnroll(String enroll) {
+		this.enroll = enroll;
+		
+	}
+
+	public void setRoom(String room) {
+		this.room = room;
+		
+	}
+
+	public void setInstructor(String instructor) {
+		this.instructorId = instructor;
+		
+	}
+
+	public void setMeet(String meeting) {
+		this.meeting = meeting;
+		
 	}
 
 }

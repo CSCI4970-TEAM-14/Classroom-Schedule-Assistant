@@ -1,10 +1,9 @@
 package servlets;
 
 import java.io.IOException;
-//import java.sql.SQLException;
+import java.sql.SQLException;
 //import java.util.List;
-
-//import javax.servlet.RequestDispatcher;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,48 +14,61 @@ import javax.servlet.http.HttpSession;
 import util. UtilClass;
 import entities.Classroom;
 
-@WebServlet("/addRoom")
-public class addRoom extends HttpServlet {
+@WebServlet("/updateRoom")
+public class updateRoom extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private UtilClass Uclass;
 
-
-    public addRoom() {
+    public updateRoom() {
         super();
 	}
 	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-		doGet(request, response);
+		
+		try {
+			Update(request, response);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+       
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		
+		response.sendRedirect("updateRoom.jsp");
+	}
 
-        String roomNum = request.getParameter("roomNumber");
+	private void Update(HttpServletRequest request, HttpServletResponse response)
+    throws SQLException, IOException, ServletException {
+		HttpSession session = request.getSession();
+		Classroom rm = new Classroom();
+
+        String roomNum = request.getParameter(rm.getId());
         String type = request.getParameter("type");
-		String building = request.getParameter("building");
+		String building = request.getParameter(rm.getBuilding());
 		String seats = request.getParameter("seats");
 		String computers = request.getParameter("computers");
 		
-		Classroom rm = new Classroom();
-		UtilClass Uclass = new UtilClass();
-		
 		rm.setId(roomNum);
-		rm.setType(type);
 		rm.setBuilding(building);
+		rm.setType(type);
 		rm.setSeats(seats);
 		rm.setComputers(computers);
 		
-		Uclass.saveClass(rm);	
-	    
-		if(Uclass.getRoom(roomNum) != null) {
-			session.setAttribute("Failed", "true");
-			response.sendRedirect("addRoom.jsp");
+		Uclass.updateClass(rm);
+	   
+		if(rm != null && rm.getBuilding().equals(building)) {
+			session.setAttribute("updated", "true");
+			response.sendRedirect("updateRoom.jsp");
 			
 		} else {
-			session.setAttribute("Added", "false");//Uclass.getRoom(roomNum));
-			response.sendRedirect("addRoom.jsp");
+			session.setAttribute("Failed", "false");
+			response.sendRedirect("updateRoom.jsp");
 		}
     }
+	
 }
