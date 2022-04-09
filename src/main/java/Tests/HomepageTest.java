@@ -48,10 +48,8 @@ public class HomepageTest {
       driver.findElement(By.linkText("Login")).click();
       Assert.assertEquals("Incorrect Login Title", "Login", driver.findElement(By.xpath("//header/h1")).getText());
       driver.findElement(By.linkText("Home")).click();
-      testScreen();
-   	
+      testScreen();	
    }
-
 
    @AfterClass
     public static void closeBrowser() {
