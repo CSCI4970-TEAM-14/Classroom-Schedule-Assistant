@@ -4,7 +4,7 @@
 <html>
 
 <head>
-<title>Add Schedules</title>
+<title>Add Section</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="userpages.css">
@@ -43,7 +43,7 @@
 	</div>
 
 	<div class="h">
-		<h2>Add Schedule</h2>
+		<h2>Add Section</h2>
 	</div>
 
 	<section>
@@ -68,22 +68,31 @@
 			<i>..Section Added!..</i>
 		</p>
 		<% } %>
+
+		<%if (session != null){
+						session.invalidate();} %>
 		<article>
-			<form action="./addSchedule" method="post">
+			<form action="./addSection" method="post">
 				<div class="container">
-					<label for="day"><b>Day</b></label> <input type="text"
-						placeholder="" name="day" required> <label
-						for="setAttribute"><b>Start Time</b></label> <input type="text"
-						placeholder="time" name="start" required> <label for="end"><b>End
-							Time</b></label> <input type="text" placeholder="" name="end" required>
+					<label for="id"><b>Id</b></label> <input type="text" placeholder=""
+						name="id" required> <label for="cid"><b>Course
+							Id</b></label> <input type="text" placeholder="" name="cid" required>
+
+					<label for="typ"><b>Type</b></label> <input type="text"
+						placeholder="" name="typ" required> <label for="meth"><b>Method</b></label>
+					<input type="text" placeholder="" name="meth" required> <label
+						for="en"><b>Enrollment no.</b></label> <input type="text"
+						placeholder="" name="en" required> <label for="room"><b>Room
+							No.</b></label> <input type="text" placeholder="" name="room" required>
+
+					<label for="inst"><b>Instructor</b></label> <input type="text"
+						placeholder="" name="inst" required> <label for="meet"><b>Schedule</b></label>
+					<input type="text" placeholder="" name="meet" required>
 
 					<button type="submit" style="color: white">Add</button>
 				</div>
 			</form>
 		</article>
 	</section>
-
-
-</body>
-
-</html>
+	</body>
+	</html>
