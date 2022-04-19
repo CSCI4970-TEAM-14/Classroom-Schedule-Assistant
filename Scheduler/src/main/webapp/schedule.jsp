@@ -3,32 +3,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Export/Import Page</title>
+<title>Schedule Page</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="CSA_2.css">
 <link rel="stylesheet" href="userpages.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
+
 <body>
 
-    <header>
-        <h2>Classroom Scheduler Assistant <img src="logo.jpg" alt="" width="45" height="45"></h2>
-    </header>
+	<header>
+		<h2>
+			Classroom Scheduler Assistant <img src="logo.jpg" alt="" width="45"
+				height="45">
+		</h2>
+	</header>
 
-    <div class="topnav">
-        <a href="userHome.jsp">Home</a>
-        <a href="update.jsp">Update Data</a>
-        <a href="schedule.jsp">View Schedules</a>
-    </div>
-    
-    <form action="/ExpImpo" method="get">
-		<label for="select">Choose data to export from the list:</label> <input
+	<div class="topnav">
+		<a href="userHome.jsp">Home</a> 
+		<a href="addClass.jsp">Add Classrooms</a>
+		<a href="adjustClass.jsp">Adjust Capacity</a>
+		<a href="update.jsp">Update Data</a> 
+		<a href="schedule.jsp">Scheduler</a>
+	</div>
+
+	<form action="/add" method="get">
+		<label for="select">Choose your option from the list:</label> <input
 			list="selections" name="select" id="select">
 		<datalist id="selections">
-			<option value="All Schedules">
-			<option value="Classroom" <a href="addSchedule.jsp"></a>> 
-			<option value="All Classroom">
+			<option value="List Schedules">
+			<option value="Add Schedules" <a href="addSchedule.jsp"></a>> 
+    
+			<option value="Remove Schedules">
+    
+			<option value="Update Schedules">  
 		</datalist>
   <input type="submit">
 </form>
@@ -72,6 +82,7 @@
 					<p></p>
     </footer>
 
-    <footer>
-        <p></p>
-    </footer>
+
+			</body>
+
+</html>

@@ -28,11 +28,10 @@ public class addRoom extends HttpServlet {
 
 	    String room = request.getParameter("room");
 	    String type = request.getParameter("type");
-		String building = request.getParameter("building");
-		String seats = request.getParameter("seats");
+		String seats = request.getParameter("seat");
 		String computers = request.getParameter("computers");
 			
-		Classroom rm = new Classroom(room,type,building,seats,computers);	
+		Classroom rm = new Classroom(room,type,seats,computers);	
 		    
 			try {
 				boolean status = db.saveDB(rm);

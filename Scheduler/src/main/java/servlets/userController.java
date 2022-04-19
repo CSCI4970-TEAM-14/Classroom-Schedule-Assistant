@@ -10,11 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DB.BackupDB;
-import entities.Account;
 import entities.Classroom;
-import entities.Course;
-import entities.Schedule;
-import entities.Instructor;
 
 public class userController extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -65,11 +61,10 @@ public class userController extends HttpServlet {
             throws ServletException, IOException, SQLException {
     	String id = request.getParameter("id");
         String type = request.getParameter("type");
-        String building = request.getParameter("building");
         String seat = request.getParameter("seat");
         String computers = request.getParameter("computers");
  
-        Classroom cl = new Classroom(id,type,building,seat,computers);
+        Classroom cl = new Classroom(id,type,seat,computers);
         db = new BackupDB();
         db.deleteDB(cl);
         response.sendRedirect("removeClass.jsp");
@@ -79,11 +74,10 @@ public class userController extends HttpServlet {
             throws SQLException, IOException {
     	String id = request.getParameter("id");
         String type = request.getParameter("type");
-        String building = request.getParameter("building");
         String seat = request.getParameter("seat");
         String computers = request.getParameter("computers");
  
-        Classroom cl = new Classroom(id,type,building,seat,computers);
+        Classroom cl = new Classroom(id,type,seat,computers);
         db = new BackupDB();
         db.saveDB(cl);
         response.sendRedirect("addClass.jsp");
@@ -93,11 +87,10 @@ public class userController extends HttpServlet {
             throws SQLException, IOException {
         String id = request.getParameter("id");
         String type  = request.getParameter("type");
-        String building = request.getParameter("building");
         String seat = request.getParameter("seat");
         String computers = request.getParameter("computers");
  
-        Classroom cl = new Classroom(id,type,building,seat,computers);
+        Classroom cl = new Classroom(id,type,seat,computers);
         db.updateDB(cl);
         response.sendRedirect("updateClass.jsp");
     }

@@ -16,7 +16,7 @@
 	</div>
 
 	<div class="topnav">
-		<a href="homepage.html">Home</a> <a href="register.jsp">Register</a> <a href="https://www.unomaha.edu">UNO</a>
+		<a href="scheduleView.jsp">Home</a> <a href="register.jsp">Register</a> <a href="https://www.unomaha.edu">UNO</a>
 	</div>
 
 	<div class="column middle">

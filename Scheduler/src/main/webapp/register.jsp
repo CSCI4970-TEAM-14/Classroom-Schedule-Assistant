@@ -14,7 +14,7 @@
 	</div>
 
 	<div class="topnav">
-		<a href="homepage.html">Home</a> <a href="login.jsp">Login</a> <a href="https://www.unomaha.edu">UNO</a>
+		<a href="scheduleView.jsp">Home</a> <a href="login.jsp">Login</a> <a href="https://www.unomaha.edu">UNO</a>
 	</div>
 
 	<h2 style="color: red">Account Registration</h2>

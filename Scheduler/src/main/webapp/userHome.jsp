@@ -19,13 +19,13 @@
     </header>
 
     <div class="topnav">
-        <a href="homepage.html">Home</a>
+        <a href="scheduleView.jsp">Home</a>
         <a href="login.jsp">Logout</a>
     </div>
 
     <section>
     <%Account acc = null; %>
-        <h1>Welcome <%= request.getParameter("name") %>!</h1>
+        <h1>Welcome!</h1>
         <nav>
             <ul>
                 <div class="relative">
@@ -43,25 +43,29 @@
 				<th>Course</th>
 				<th>Meeting</th>
 				<th>Instructor</th>
-				<th>Actions</th>
 			</tr>
-			<tr>
-				<c:forEach var="classroom" items="${room}">
-					<td><c:out value="${classroom.id}" /></td>
-				</c:forEach>
-				<c:forEach var="course" items="${co}">
-					<td><c:out value="${course.id}" /> <c:out
-							value="${course.title}" /></td>
-				</c:forEach>
-				<c:forEach var="meeting" items="${sh}">
-					<td><c:out value="${meeting.day}" /></td>
-				</c:forEach>
-				<c:forEach var="instructor" items="${in}">
-					<td><c:out value="${instructor.first}" /> <c:out
-							value="${instructor.last}" /></td>
-				</c:forEach>
-			</tr>
-            </table>
+			<c:forEach var="schedule" items="${room}">
+                                <tr>
+                                    <td>
+                                        <c:out value="${schedule.Rid}" />
+                                    </td>
+                                    <td>
+                                        <c:out value="${schedule.Cid}" />
+                                    </td>
+                                    <td>
+                                        <c:out value="${schedule.Ctitle}" />
+                                    </td>
+                                    <td>
+                                        <c:out value="${schedule.day}" />
+                                        <c:out value="${schedule.start}" />
+                                        <c:out value="${schedule.end}" />
+                                    </td>
+                                    <td>
+                                        <c:out value="${schedule.Instname}" />
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </table>
         </article>
     </section>
 </body>

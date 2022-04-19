@@ -47,7 +47,7 @@
         <nav>
             <div class="topnav">
                 <a href="allClass.jsp">View All Classrooms</a>
-                <a href="updateClass.jsp">Update Classrooms</a>
+                <a href="update.jsp">Update Classrooms</a>
                 <a href="adjust.jsp">Adjust Capacity</a>
             </div>
         </nav>
@@ -79,9 +79,6 @@
 
                     <label for="type"><b>Type</b></label>
                     <input type="text" placeholder="" name="type" required>
-
-                    <label for="building"><b>Building</b></label>
-                    <input type="text" placeholder="" name="building" required>
 
                     <label for="seats"><b>Seats</b></label>
                     <input type="text" placeholder="" name="seats" required>

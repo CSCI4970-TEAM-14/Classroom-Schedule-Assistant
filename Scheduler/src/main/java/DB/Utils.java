@@ -12,7 +12,6 @@ import java.util.List;
 import entities.Account;
 import entities.Classroom;
 import entities.Course;
-import entities.Instructor;
 import entities.Schedule;
 
 public class Utils {
@@ -110,33 +109,7 @@ public class Utils {
         return list;
     }
 
-    public List<Instructor> listInstructor() throws SQLException {
-        List<Instructor> list = new ArrayList<>();
-        String result;
-        String sql = "SELECT * FROM Instructor WHERE first=? and last = ?";
-        result = "Data Selected!";
-        connect();
-        try {
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(sql);
-        System.out.println(statement);
-         
-        while (resultSet.next()) {
-            String first = resultSet.getString("first");
-            String last = resultSet.getString("last");
-             
-           // Instructor in = new Instructor(id, first, last, department);
-            //list.add(in);
-        }
-        resultSet.close();
-        statement.close();
-        } catch(SQLException e) {
-			result = "Data not added!";
-			e.printStackTrace();
-        }
-        //disconnect();
-        return list;
-    }
+
 
     public List<Schedule> listSchedule() throws SQLException {
         List<Schedule> list = new ArrayList<>();
@@ -195,7 +168,7 @@ public class Utils {
          
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, room.getId());
-        statement.setString(2, room.getBuilding());
+        statement.setString(2, room.getType());
         statement.setString(3, room.getSeat());
         statement.setString(4,room.getComputers());
         System.out.println(statement);

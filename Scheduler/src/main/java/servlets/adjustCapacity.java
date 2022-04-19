@@ -27,21 +27,20 @@ public class adjustCapacity extends HttpServlet {
     	HttpSession session = request.getSession();
     	
     	String room = request.getParameter("room");
-		String building = request.getParameter("building");
 		String seats = request.getParameter("seats");
 		//String computers = request.getParameter("comp");
 		
-		Classroom rm = new Classroom(room,building,seats);	
+		Classroom rm = new Classroom(room,seats);	
 	    
 		try {
 			boolean status = db.adjustCap(rm);
 			if(status) {
 				session.setAttribute("Adjusted", status);
-				response.sendRedirect("adjust.jsp");
+				response.sendRedirect("adjustClass.jsp");
 				
 			} else {
 				session.setAttribute("Failed", status);
-				response.sendRedirect("adjust.jsp");
+				response.sendRedirect("adjustClass.jsp");
 			}
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
@@ -51,6 +50,6 @@ public class adjustCapacity extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
 
-    	response.sendRedirect("adjust.jsp");
+    	response.sendRedirect("adjustClass.jsp");
     }
 }

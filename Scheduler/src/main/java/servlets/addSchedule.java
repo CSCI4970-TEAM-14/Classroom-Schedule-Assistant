@@ -28,18 +28,22 @@ public addSchedule() {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 throws ServletException, IOException {
 		HttpSession session = request.getSession();
-
+		
+		String room = request.getParameter("room");
+	    String courseId = request.getParameter("course");
+		String section = request.getParameter("section");
+		String instructor = request.getParameter("instructor");
 	    String day = request.getParameter("day");
 	    String start = request.getParameter("start");
 		String end = request.getParameter("end");
 			
-		Schedule sh = new Schedule(day, start,end);	
+		Schedule sh = new Schedule(room,courseId,section, instructor,day, start,end);	
 		    
 			try {
 				boolean status = db.saveSchedule(sh);
 				if(status) {
 					session.setAttribute("Added", status);
-					response.sendRedirect("addSchedule.jsp");//look into object
+					response.sendRedirect("addSchedule.jsp");
 					
 				} else {
 					session.setAttribute("Failed", status);

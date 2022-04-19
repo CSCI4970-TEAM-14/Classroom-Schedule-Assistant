@@ -71,11 +71,20 @@
 		<article>
 			<form action="./addSchedule" method="post">
 				<div class="container">
-					<label for="day"><b>Day</b></label> <input type="text"
-						placeholder="" name="day" required> <label
-						for="setAttribute"><b>Start Time</b></label> <input type="text"
-						placeholder="time" name="start" required> <label for="end"><b>End
-							Time</b></label> <input type="text" placeholder="" name="end" required>
+					<label for="room"><b>Room</b></label>
+					 <input type="text" placeholder="" name="room" required>
+					 <label for="course"><b>Course ID</b></label>
+					 <input type="text" placeholder="" name="course" required>
+					 <label for="sec"><b>Section ID</b></label>
+					 <input type="text" placeholder="" name="section" required>
+					 <label for="in"><b>Instructor</b></label>
+					 <input type="text" placeholder="" name="in" required>
+					<label for="day"><b>Day</b></label>
+					 <input type="text" placeholder="" name="day" required>
+					<label for="setAttribute"><b>Start Time</b></label> <input type="text"
+						placeholder="time" name="start" required>
+					 <label for="end"><b>EndTime</b></label>
+					 <input type="text" placeholder="" name="end" required>
 
 					<button type="submit" style="color: white">Add</button>
 				</div>

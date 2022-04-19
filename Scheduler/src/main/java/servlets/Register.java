@@ -18,8 +18,8 @@ public class Register extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private BackupDB db;
 
-    public void init() {
-        db = new BackupDB();
+    public Register() {
+        super();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -41,9 +41,10 @@ public class Register extends HttpServlet {
         try {
         	boolean status = db.createAccount(acc);
 			if(status){
-				   response.sendRedirect("userHome.jsp?name="+firstName);
+				   session.setAttribute("Registered", status);
+				   response.sendRedirect("userHome.jsp?email="+email);
 			} else {
-			    session.setAttribute("inUse", "true");
+			    session.setAttribute("inUse", status);
 				response.sendRedirect("register.jsp");
 			    }
 		} catch (SQLException | IOException e) {

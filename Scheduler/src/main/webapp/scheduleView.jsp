@@ -121,28 +121,34 @@
 	<div align="center">
 		<table border="1" cellpadding="5">
 			<tr>
-				<th>Classroom</th>
-				<th>Course</th>
-				<th>Meeting</th>
-				<th>Instructor</th>
-				<th>Actions</th>
-			</tr>
-			<tr>
-				<c:forEach var="classroom" items="${room}">
-					<td><c:out value="${classroom.id}" /></td>
-				</c:forEach>
-				<c:forEach var="course" items="${co}">
-					<td><c:out value="${course.id}" /> <c:out
-							value="${course.title}" /></td>
-				</c:forEach>
-				<c:forEach var="meeting" items="${sh}">
-					<td><c:out value="${meeting.day}" /></td>
-				</c:forEach>
-				<c:forEach var="instructor" items="${in}">
-					<td><c:out value="${instructor.first}" /> <c:out
-							value="${instructor.last}" /></td>
-				</c:forEach>
-			</tr>
-		</table>
-	</div>
-</body>
+                                <th>Classroom</th>
+                                <th>Course</th>
+                                <th>Meeting</th>
+                                <th>Instructor</th>
+                            </tr>
+                            <c:forEach var="schedule" items="${room}">
+                                <tr>
+                                    <td>
+                                        <c:out value="${schedule.Rid}" />
+                                    </td>
+                                    <td>
+                                        <c:out value="${schedule.Cid}" />
+                                    </td>
+                                    <td>
+                                        <c:out value="${schedule.Ctitle}" />
+                                    </td>
+                                    <td>
+                                        <c:out value="${schedule.day}" />
+                                        <c:out value="${schedule.start}" />
+                                        <c:out value="${schedule.end}" />
+                                    </td>
+                                    <td>
+                                        <c:out value="${schedule.Instname}" />
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </div>
+                </body>
+
+                </html>

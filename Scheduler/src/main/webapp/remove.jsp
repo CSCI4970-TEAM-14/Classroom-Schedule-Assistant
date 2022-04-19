@@ -19,8 +19,7 @@
     <div class="topnav">
         <a href="userHome.jsp">Home</a>
         <a href="addClass.jsp">Remove Classrooms</a>
-        <a href="addSchedule.jsp">Remove Schedules</a>
-        <a href="addSection.jsp">Remove Sections</a>
+        <a href="schedule.jsp">Remove Schedules</a>
     </div>
 
     <footer>

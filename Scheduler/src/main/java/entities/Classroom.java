@@ -4,13 +4,10 @@ import java.io.Serializable;
 
 /**
  * CREATE TABLE Class 
- * (	id String varchar() NOT NULL,
- * 		type varchar(100) NOT NULL,
- * 		building VARCHAR (10),
- *      seat varchar() NOT NULL,
- *      computers varchar(),
- *      FOREIGN KEY(building) REFRENCES Building(ID),
- * 		PRIMARY KEY (Id));
+ * (	id int(),
+ * 		type varchar(50),
+ *      seat int(20),
+ *      computers int(),
  */
 public class Classroom implements Serializable{
 	
@@ -19,30 +16,26 @@ public class Classroom implements Serializable{
 	private String id;
 
 	private String type;
-	
-	private String building;
 
 	private String seat;
-	
 	
 	private String computers;
 
 	public Classroom() {
 	}
 
-	public Classroom(String id, String type, String building, String seat, String computers) {
+	public Classroom(String id, String type, String seat, String computers) {
 		this.id = id;
 		this.type = type;
-		this.building = building;
 		this.seat = seat;
 		this.computers = computers;
 	}
 	
-	public Classroom(String id, String building, String seat) {
+	public Classroom(String id, String seat) {
 		this.id = id;
-		this.building = building;
 		this.seat = seat;
 	}
+	
 	public Classroom(String id) {
 		this.id = id;
 	}
@@ -63,10 +56,6 @@ public class Classroom implements Serializable{
 		this.type = type;
 	}
 	
-	public String getBuilding() {
-		return building;
-	}
-
 	public String getSeat() {
 		return seat;
 	}
@@ -81,11 +70,6 @@ public class Classroom implements Serializable{
 
 	public void setComputers(String computers) {
 		this.computers = computers;
-	}
-
-	public void setBuilding(String building) {
-		this.building = building;
-		
 	}
 
 }

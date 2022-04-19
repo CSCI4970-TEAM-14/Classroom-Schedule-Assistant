@@ -21,10 +21,8 @@
         <a href="userHome.jsp">Home</a>
         <a href="addClass.jsp">Add Classrooms</a>
         <a href="addSchedule.jsp">Add Schedules</a>
-        <a href="addSection.jsp">Add Sections</a>
-        <a href="adjust.jsp">Adjust Capacity</a>
-        <a href="updateRoom.jsp">Update Data</a>
-        <a href="scheduleView.jsp">Scheduler</a>
+        <a href="adjustClass.jsp">Adjust Capacity</a>
+        <a href="schedule.jsp">Scheduler</a>
     </div>
 
     <footer>
