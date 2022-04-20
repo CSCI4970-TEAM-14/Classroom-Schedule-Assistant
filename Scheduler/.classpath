@@ -14,6 +14,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/14125/Downloads/selenium-server-standalone-3.141.59.jar" sourcepath="src/main/webapp/WEB-INF/lib"/>
+	<classpathentry kind="lib" path="C:/Users/14125/Downloads/selenium-server-standalone-3.141.59.jar" sourcepath="C:/Users/14125/Downloads/seleniumFolder/chromedriver _ selenium-20211214T214355Z-001/chromedriver _ selenium/selenium-server-standalone-3.141.59.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -49,7 +49,7 @@
 			<input type="text" placeholder="Enter email" name="email" required>
 			<label	for="pwd"><b>Password</b></label>
 			<input type="password" placeholder="Enter password" name="pwd" required>
-			<button type="submit" style="color: white">Register</button>
+			<button id="regBtn" type="submit" style="color: white">Register</button>
 		</div>
 
 		<div class="container" style="background-color: #f1f1f1">
