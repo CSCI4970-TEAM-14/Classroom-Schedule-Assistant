@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DB.BackupDB;
+import entities.Account;
 import entities.Classroom;
 
 @WebServlet("/addRoom")
@@ -29,9 +30,21 @@ public class addRoom extends HttpServlet {
 	    String room = request.getParameter("room");
 	    String type = request.getParameter("type");
 		String seats = request.getParameter("seat");
-		String computers = request.getParameter("computers");
-			
-		Classroom rm = new Classroom(room,type,seats,computers);	
+		String computers = request.getParameter("computer");
+		
+		/*int roomId = 0;
+		int seat = 0;
+		int comp = 0;
+        
+        try { 
+        	roomId = Integer.parseInt(room);
+        	seat = Integer.parseInt(seats);
+        	comp = Integer.parseInt(computers);
+        	} catch (NumberFormatException nfe)
+        { nfe.printStackTrace(); }*/	
+		Classroom rm = new Classroom(room,type,seats,computers);
+		System.out.println("Entered:" + room + ","+ type + "," + seats + "," + computers);
+        
 		    
 			try {
 				boolean status = db.saveDB(rm);

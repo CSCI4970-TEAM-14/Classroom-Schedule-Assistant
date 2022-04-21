@@ -120,14 +120,14 @@ public class BackupDB{
         return acc;
     }
     
-	public Account checkLogin(int id, String email) throws SQLException, ClassNotFoundException {
+	public Account checkLogin(String username, String password) throws SQLException, ClassNotFoundException {
 		connect();
-		String sql = "SELECT * FROM Account WHERE id = ? and email = ?"; //username
+		String sql = "SELECT * FROM Account WHERE username = ? and password = ?"; 
 		PreparedStatement statement = jdbcConnection.prepareStatement(sql);
 		
 			
-		statement.setInt(1, id);
-		statement.setString(2, email);
+		statement.setString(1, username);
+		statement.setString(2, password);
 		
 		ResultSet result = statement.executeQuery();
 
@@ -135,8 +135,8 @@ public class BackupDB{
 
 		if (result.next()) {
 			acc = new Account();
-			acc.setId(result.getInt("id"));
-			acc.setUserName(result.getString(email));
+			acc.setUserName(result.getString(username));
+			acc.setUserName(result.getString(password));
 			//acc.setEmail(password);
 		}
 
@@ -146,14 +146,17 @@ public class BackupDB{
 	}
 
     public boolean saveDB(Classroom cl) throws SQLException {
-		 String sql = "INSERT INTO Classroom (id, type, seat,computers) VALUES (?, ?, ?, ?)";
-	        connect();
-	         
-	        PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-	        statement.setString(1, cl.getId());
+    	PreparedStatement statement = null;
+        String sql = "INSERT INTO Classroom"
+                + "(room, type, seat, computers) "
+                + "VALUES" + "(?,?,?,?)";
+		 
+	        connect();  
+	        statement = jdbcConnection.prepareStatement(sql);
+	        statement.setInt(1, Integer.parseInt(cl.getId()));
 	        statement.setString(2, cl.getType());
-	        statement.setString(3, cl.getSeat());
-	        statement.setString(4, cl.getComputers());
+	        statement.setInt(3, Integer.parseInt(cl.getSeat()));
+	        statement.setInt(4, Integer.parseInt(cl.getComputers()));
 	        
 	        boolean rowInserted = statement.executeUpdate() > 0;
 	        statement.close();
@@ -319,8 +322,38 @@ public class BackupDB{
         disconnect();
         return list;
     }
-
+    
     public List<Schedule> ListSchedule() throws SQLException {
+    	List<Schedule> list = new ArrayList<>();
+    	PreparedStatement statement = null;
+    	String sql = "SELECT * FROM Schedule";
+    	  connect();
+    	  try {
+    	    statement = jdbcConnection.prepareStatement(sql);
+    	    ResultSet rs= statement.executeQuery();
+    	    while (rs.next()) {
+    	    Schedule sh = new Schedule();
+    	    sh.setId(rs.getInt("id"));
+    	    sh.setRoom("room");
+    	    sh.setCourse("courseIdsh");
+    	    sh.setSection("section");
+    	    sh.setInstructor("instructor");
+    	    sh.setDate(rs.getString("day"));
+            sh.setStartTime(rs.getString("start"));
+            sh.setEndTime(rs.getString("end"));
+            sh.setRoom(rs.getString("room"));
+    	    list.add(sh);
+    	    }
+    	  } catch (Exception e) {
+    	    // TODO Auto-generated catch block
+    	    e.printStackTrace();
+    	  }finally {
+    	    statement.close();
+    	  }
+    	  return list;
+    	}
+
+    public List<Schedule> istSchedule() throws SQLException {
         List<Schedule> list = new ArrayList<>();
         String sql = "SELECT * FROM Schedule WHERE day=?";
         connect();
@@ -468,8 +501,8 @@ public class BackupDB{
     /*//************************************************************ADD/CREATE*********************************************************************\\*/
     public boolean createAccount(Account acc) throws SQLException { //addAccount
     	PreparedStatement statement = null;
-        String sql = "INSERT INTO Schedule"
-                + "(username, firstname,lastname, email,password) "
+        String sql = "INSERT INTO Account"
+                + "(username, firstname, lastname, email, password) "
                 + "VALUES" + "(?,?,?,?,?)";
         connect();
          
@@ -485,6 +518,29 @@ public class BackupDB{
         statement.close();
         disconnect();
         return rowInserted;
+    }
+    
+public boolean addRoom(String room, String type,String seat,String computer) throws SQLException { 
+        
+        PreparedStatement statement = null;
+        String sql = "INSERT INTO Classroom"
+                           + "(room, type, seat, computers) "
+                           + "VALUES" + "(?,?,?,?)";
+        connect();
+         try {
+            //dbConnection = getDBConnection();
+            statement = jdbcConnection.prepareStatement(sql);
+            statement.setInt(1,Integer.parseInt(room));
+            statement.setString(2, type);
+            statement.setInt(3,Integer.parseInt(seat));
+            statement.setInt(4, Integer.parseInt(computer));
+            statement.executeUpdate();
+        } catch (SQLException e) {
+             System.out.println(e.getMessage());
+        } catch(NumberFormatException nfe)
+         { nfe.printStackTrace();
+         }
+        return false;//0??
     }
 
     public boolean ScheduleRoom(String roomId, String courseId,String sectionId,String instructor, String day, String startTime, String endTime) throws SQLException { //int??//addSchedule
@@ -515,7 +571,7 @@ public class BackupDB{
     
     public boolean addAccount(String username, String firstname,String lastname,String email, String password) throws SQLException { //int??//addSchedule
         PreparedStatement statement = null;
-        String sql = "INSERT INTO Schedule"
+        String sql = "INSERT INTO Account"
                            + "(username, firstname,lastname, email,password) "
                            + "VALUES" + "(?,?,?,?,?)";
         connect();

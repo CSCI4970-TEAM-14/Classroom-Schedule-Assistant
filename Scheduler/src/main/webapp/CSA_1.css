@@ -2,10 +2,6 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-}
-
 /* Style the header */
 .header {
   background-color: #f1f1f1;
@@ -17,10 +13,6 @@ body {
 .topnav {
   overflow: hidden;
   background-color: #333;
-}
-
-.container {
-  padding: 10px;
 }
 
 /* Style the topnav links */

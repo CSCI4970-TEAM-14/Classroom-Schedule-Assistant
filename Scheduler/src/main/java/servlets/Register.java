@@ -33,7 +33,7 @@ public class Register extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         
-        System.out.println("Entered:" + firstName + "," + lastName + "," + email);
+        System.out.println("Entered:" + username + ","+ firstName + "," + lastName + "," + email);
         Account acc = new Account(username, firstName, lastName, email, password);
         
         db = new BackupDB();
@@ -42,7 +42,7 @@ public class Register extends HttpServlet {
         	boolean status = db.createAccount(acc);
 			if(status){
 				   session.setAttribute("Registered", status);
-				   response.sendRedirect("userHome.jsp?email="+email);
+				   response.sendRedirect("userHome.jsp? name=" +firstName);
 			} else {
 			    session.setAttribute("inUse", status);
 				response.sendRedirect("register.jsp");

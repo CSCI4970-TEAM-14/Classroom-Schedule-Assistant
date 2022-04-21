@@ -20,29 +20,25 @@ public class Log extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	String username = request.getParameter("username");
-        String email = request.getParameter("password");
-        int id = 0;
-        
-        try { 
-        	id = Integer.parseInt(username);
-        	} catch (NumberFormatException nfe)
-        { nfe.printStackTrace(); }
-
+        String password = request.getParameter("password");
          
         BackupDB db = new BackupDB();
+        Account a = new Account();
+        a.setUserName(username);
+        a.setPassword(password);
         HttpSession session = request.getSession();
          
         try {
-            Account acc = db.checkLogin(id, email);
+            boolean acc = db.validate(a);
              
-            if (acc != null) {
+            if (acc) {
             	session.setAttribute("acc", acc);
-                response.sendRedirect("userHome.jsp");
+                response.sendRedirect("userHome.jsp?name"+username);
             } else {
             	session.setAttribute("invalid", acc);
-				response.sendRedirect("userHome.jsp");
+				response.sendRedirect("login.jsp");
             }             
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             throw new ServletException(ex);
         }
     }

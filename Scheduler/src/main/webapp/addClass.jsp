@@ -46,9 +46,9 @@
     <section>
         <nav>
             <div class="topnav">
-                <a href="allClass.jsp">View All Classrooms</a>
+                <a href="addClass.jsp">View All Classrooms</a>
                 <a href="update.jsp">Update Classrooms</a>
-                <a href="adjust.jsp">Adjust Capacity</a>
+                <a href="adjustClass.jsp">Adjust Capacity</a>
             </div>
         </nav>
         <article>
@@ -80,11 +80,11 @@
                     <label for="type"><b>Type</b></label>
                     <input type="text" placeholder="" name="type" required>
 
-                    <label for="seats"><b>Seats</b></label>
-                    <input type="text" placeholder="" name="seats" required>
+                    <label for="seat"><b>Seats</b></label>
+                    <input type="text" placeholder="" name="seat" required>
 
-                    <label for="com"><b>Computers</b></label>
-                    <input type="text" placeholder="" name="com" required>
+                    <label for="computer"><b>Computers</b></label>
+                    <input type="text" placeholder="" name="computer" required>
 
                     <button type="submit" style="color:white">Add</button>
                 </div>

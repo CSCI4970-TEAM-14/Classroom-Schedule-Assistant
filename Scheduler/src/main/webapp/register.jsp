@@ -6,7 +6,10 @@
 <title>Registration Page</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="CSA_1.css">
+<link rel="stylesheet" href="CSA_2.css">
 <link rel="stylesheet" href="log.css">
+
 </head>
 <body>
 	<div class="header">
@@ -39,16 +42,16 @@
 		<div class="container">
 			<!-- <label for="UserId"><b>UserId</b></label> 
 			<input type="text" placeholder="Enter id" name="UserId" required> -->
-			<label for="Username"><b>Username</b></label>
-			<input type="text" placeholder="Enter username" name="Username" required>
-			<label for="fname"><b>Firstname</b></label>
-			<input type="text" placeholder="Enter firstname" name="fname" required> 
-			<label for="lname"><b>Lastname</b></label>
-			<input type="text" placeholder="Enter lastname" name="lname" required>
+			<label for="username"><b>Username</b></label>
+			<input type="text" placeholder="Enter username" name="username" required>
+			<label for="firstName"><b>Firstname</b></label>
+			<input type="text" placeholder="Enter firstname" name="firstName" required> 
+			<label for="lastName"><b>Lastname</b></label>
+			<input type="text" placeholder="Enter lastname" name="lastName" required>
 			<label for="email"><b>Email</b></label>
 			<input type="text" placeholder="Enter email" name="email" required>
-			<label	for="pwd"><b>Password</b></label>
-			<input type="password" placeholder="Enter password" name="pwd" required>
+			<label	for="password"><b>Password</b></label>
+			<input type="password" placeholder="Enter password" name="password" required>
 			<button type="submit" style="color: white">Register</button>
 		</div>
 
