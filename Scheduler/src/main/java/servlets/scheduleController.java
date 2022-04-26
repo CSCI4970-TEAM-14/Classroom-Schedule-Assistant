@@ -61,15 +61,14 @@ public class scheduleController extends HttpServlet {
     private void removeSchedule(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
                 HttpSession session = request.getSession();
-                String room = request.getParameter("room");
+     
                 String courseId = request.getParameter("courseId");
                 String sectionId = request.getParameter("sectionId");
                 String instructor = request.getParameter("instructor");	
                 String day = request.getParameter("day");
-                String start= request.getParameter("start");
-                String end = request.getParameter("end");
+           
  
-        Schedule sh = new Schedule(room, courseId, sectionId, instructor, day, start, end);
+        Schedule sh = new Schedule(courseId, sectionId, instructor, day);
         db = new BackupDB();
         boolean status = db.deleteSchedule(sh);
 
@@ -86,41 +85,49 @@ public class scheduleController extends HttpServlet {
  
     private void addSchedule(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
-    	 HttpSession session = request.getSession();
-                String room = request.getParameter("room");
-                String courseId = request.getParameter("courseId");
-                String sectionId = request.getParameter("sectionId");
-                String instructor = request.getParameter("instructor");	
-                String day = request.getParameter("day");
-                String start= request.getParameter("start");
-                String end = request.getParameter("end");
- 
-                Schedule sh = new Schedule(room, courseId, sectionId, instructor, day, start, end);//?
-                db = new BackupDB();
-                boolean status = db.ScheduleRoom(room, courseId, sectionId, instructor, day, start, end);
-
-                if(status) {
-                    session.setAttribute("Added", status);
-                    response.sendRedirect("addSchedule.jsp");                    
-                } else {
-                    session.setAttribute("Failed", status); //change object
-                    response.sendRedirect("addSchedule.jsp");
-                }
-                //response.sendRedirect("addSchedule.jsp");
-    }
+    		HttpSession session = request.getSession();
+		
+	    String course = request.getParameter("course");
+		String section = request.getParameter("sec");
+		String method = request.getParameter("meth");
+		String enroll = request.getParameter("enr");
+		String instructor = request.getParameter("in");
+	    String day = request.getParameter("day");
+	    String start = request.getParameter("start");
+		String end = request.getParameter("end");
+		String room = request.getParameter("room");
+			
+		Schedule sh = new Schedule(course,section,method,enroll, instructor,day, start,end,room);	
+		    
+			try {
+				boolean status = db.saveSchedule(sh);
+				if(status) {
+					session.setAttribute("Added", status);
+					response.sendRedirect("addSchedule.jsp");
+					
+				} else {
+					session.setAttribute("Failed", status);
+					response.sendRedirect("addSchedule.jsp");
+				}
+			} catch (IOException | SQLException e) {
+				e.printStackTrace();
+			}
+	  }
  
     private void updateSchedule(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
     	 HttpSession session = request.getSession();
-                String room = request.getParameter("room");
-                String courseId = request.getParameter("courseId");
-                String sectionId = request.getParameter("sectionId");
-                String instructor = request.getParameter("instructor");	
-                String day = request.getParameter("day");
-                String start= request.getParameter("start");
-                String end = request.getParameter("end");
- 
-                Schedule sh = new Schedule(room, courseId, sectionId, instructor, day, start, end);
+    	String course = request.getParameter("course");
+ 		String section = request.getParameter("sec");
+ 		String method = request.getParameter("meth");
+ 		String enroll = request.getParameter("enr");
+ 		String instructor = request.getParameter("in");
+ 	    String day = request.getParameter("day");
+ 	    String start = request.getParameter("start");
+ 		String end = request.getParameter("end");
+ 		String room = request.getParameter("room");
+ 			
+ 		Schedule sh = new Schedule(course,section,method,enroll, instructor,day, start,end,room);
                 int status = db.updateSchedule(sh);
                 if(status != 0 ) { //look into it
                     session.setAttribute("Updated", status);

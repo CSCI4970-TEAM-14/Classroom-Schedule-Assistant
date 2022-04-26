@@ -62,9 +62,8 @@ public class userController extends HttpServlet {
     	String id = request.getParameter("id");
         String type = request.getParameter("type");
         String seat = request.getParameter("seat");
-        String computers = request.getParameter("computers");
  
-        Classroom cl = new Classroom(id,type,seat,computers);
+        Classroom cl = new Classroom(id,type,seat);
         db = new BackupDB();
         db.deleteDB(cl);
         response.sendRedirect("removeClass.jsp");
@@ -75,9 +74,8 @@ public class userController extends HttpServlet {
     	String id = request.getParameter("id");
         String type = request.getParameter("type");
         String seat = request.getParameter("seat");
-        String computers = request.getParameter("computers");
  
-        Classroom cl = new Classroom(id,type,seat,computers);
+        Classroom cl = new Classroom(id,type,seat);
         db = new BackupDB();
         db.saveDB(cl);
         response.sendRedirect("addClass.jsp");
@@ -88,9 +86,8 @@ public class userController extends HttpServlet {
         String id = request.getParameter("id");
         String type  = request.getParameter("type");
         String seat = request.getParameter("seat");
-        String computers = request.getParameter("computers");
  
-        Classroom cl = new Classroom(id,type,seat,computers);
+        Classroom cl = new Classroom(id,type,seat);
         db.updateDB(cl);
         response.sendRedirect("updateClass.jsp");
     }

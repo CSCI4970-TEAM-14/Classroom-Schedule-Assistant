@@ -16,6 +16,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="userpages.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
     <header>
@@ -23,7 +24,7 @@
     </header>
 
     <div class="topnav">
-        <a href="scheduleView.jsp">Home</a>
+        <a href="scheduleView.jsp"><i class="fa fa-home"></i>Home</a>
         <a href="login.jsp">Logout</a>
     </div>
 
@@ -36,6 +37,7 @@
                 <li class="b"><a href="update.jsp" style="color: white">Update </a></li>
                 <li class="b"><a href="remove.jsp" style="color: white">Remove</a></li>
                 <li class="b"><a href="export.jsp" style="color: white">Export</a></li>
+                <li class="b"><a href="export.jsp" style="color: white">Import</a></li>
                 </div>
             </ul>
         </nav>
@@ -43,34 +45,28 @@
         <article>
             <table class="center">
       			<tr>
-                                <th>Classroom</th>
                                 <th>Course</th>
-                                <th> Section</th>
-                                <th>Meeting</th>
-                                <th>Instructor</th>
-                            </tr>
-                            <c:forEach var="sched" items="${ListSchedule.rows}">
-                                <tr>
-                                    <td>
-                                        <c:out value="${sched.room}" />
-                                    </td>
-                                    <td>
-                                        <c:out value="${sched.courseId}" />
-                                    </td>
-                                    <td>
-                                        <c:out value="${sched.section}" />
-                                    </td>
-                                    <td>
-                                        <c:out value="${sched.instructor}" />
-                                    </td>
-                                    <td>
-                                        <c:out value="${sched.day}"/> 
-                                        <c:out value="${sched.start}"/> 
-                                        <c:out value="${sched.end}"  />
-                                    </td>
-                                
-                                </tr>
-                            </c:forEach>
+				<th>Section</th>
+				<th>Method</th>
+				<th>Enrollment</th>
+				<th>Instructor</th>
+				<th>Meeting</th>
+				<th></th>
+				<th>Classroom</th>
+			</tr>
+			<c:forEach var="sched" items="${ListSchedule.rows}">
+				<tr>
+					<td><c:out value="${sched.course}" /></td>
+					<td><c:out value="${sched.section}" /></td>
+					<td><c:out value="${sched.method}" /></td>
+					<td><c:out value="${sched.enroll}" /></td>
+					<td><c:out value="${sched.instructor}" /></td>
+					<td><c:out value="${sched.day}" /></td>
+					<td><c:out value="${sched.start}"/> - <c:out value="${sched.end}" /></td>
+					<td><c:out value="${sched.room}" /></td>
+
+				</tr>
+			</c:forEach>
                         </table>
         </article>
     </section>

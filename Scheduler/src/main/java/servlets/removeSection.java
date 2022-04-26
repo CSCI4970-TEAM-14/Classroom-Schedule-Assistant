@@ -1,11 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-//import java.sql.SQLException;
-//import java.util.List;
 import java.sql.SQLException;
-
-//import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,15 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DB.BackupDB;
-import entities.Schedule;
+import entities.Section;
 
-@WebServlet("/addSchedule")
-public class addSchedule extends HttpServlet {
+@WebServlet("/removeSection")
+public class removeSection extends HttpServlet {
 private static final long serialVersionUID = 1L;
 private BackupDB db;
 
-public addSchedule() {
-    super();
+public removeSection() {
+  super();
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -32,24 +28,18 @@ throws ServletException, IOException {
 	    String course = request.getParameter("course");
 		String section = request.getParameter("sec");
 		String method = request.getParameter("meth");
-		String enroll = request.getParameter("enr");
-		String instructor = request.getParameter("in");
-	    String day = request.getParameter("day");
-	    String start = request.getParameter("start");
-		String end = request.getParameter("end");
-		String room = request.getParameter("room");
 			
-		Schedule sh = new Schedule(course,section,method,enroll, instructor,day, start,end,room);	
+		Section sh = new Section(course,section,method);	
 		    
 			try {
-				boolean status = db.saveSchedule(sh);
+				boolean status = db.deleteSection(sh);
 				if(status) {
-					session.setAttribute("Added", status);
-					response.sendRedirect("addSchedule.jsp");
+					session.setAttribute("Removed", status);
+					response.sendRedirect("removeSection.jsp");
 					
 				} else {
 					session.setAttribute("Failed", status);
-					response.sendRedirect("addSchedule.jsp");
+					response.sendRedirect("removeSection.jsp");
 				}
 			} catch (IOException | SQLException e) {
 				e.printStackTrace();
@@ -58,7 +48,7 @@ throws ServletException, IOException {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 throws ServletException, IOException {
-		 response.sendRedirect("addSchedule.jsp");
+		 response.sendRedirect("removeSection.jsp");
 		
 	}
 }

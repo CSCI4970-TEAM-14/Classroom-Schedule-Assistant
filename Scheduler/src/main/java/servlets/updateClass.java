@@ -12,12 +12,12 @@ import javax.servlet.http.HttpSession;
 import DB.BackupDB;
 import entities.Classroom;
 
-@WebServlet("/addRoom")
-public class addRoom extends HttpServlet {
+@WebServlet("/updateClass")
+public class updateClass extends HttpServlet {
   private static final long serialVersionUID = 1L;
   private BackupDB db;
 
-  public addRoom() {
+  public updateClass() {
       super();
 	}
 	
@@ -43,14 +43,14 @@ public class addRoom extends HttpServlet {
         
 		    
 			try {
-				boolean status = db.saveDB(rm);
+				boolean status = db.updateClass(rm);
 				if(status) {
-					session.setAttribute("Added", status);
-					response.sendRedirect("addClass.jsp");
+					session.setAttribute("Updated", status);
+					response.sendRedirect("updateClass.jsp");
 					
 				} else {
 					session.setAttribute("Failed", status);
-					response.sendRedirect("addClass.jsp");
+					response.sendRedirect("updateClass.jsp");
 				}
 			} catch (SQLException | IOException e) {
 				e.printStackTrace();
@@ -59,7 +59,7 @@ public class addRoom extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
   throws ServletException, IOException {
-		 response.sendRedirect("addClass.jsp");
+		 response.sendRedirect("updateClass.jsp");
 		
 	}
 }

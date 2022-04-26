@@ -6,21 +6,22 @@
 <title>Registration Page</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="CSA_1.css">
-<link rel="stylesheet" href="CSA_2.css">
-<link rel="stylesheet" href="log.css">
-
+<link rel="stylesheet" href="out.css">
+<link rel="stylesheet" href="input.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 	<div class="header">
-		<h1>Classroom Scheduler</h1>
+		<h1>
+		Classroom Scheduler <img src="logo.jpg" alt="" width="45" height="45">
+		</h1>
 	</div>
 
 	<div class="topnav">
 		<a href="scheduleView.jsp">Home</a> <a href="login.jsp">Login</a> <a href="https://www.unomaha.edu">UNO</a>
 	</div>
 
-	<h2 style="color: red">Account Registration</h2>
+	<h2 style="color: black">Account Registration</h2>
 	
 			<%
     		if (session.getAttribute("inUse") != null) {
@@ -52,10 +53,10 @@
 			<input type="text" placeholder="Enter email" name="email" required>
 			<label	for="password"><b>Password</b></label>
 			<input type="password" placeholder="Enter password" name="password" required>
-			<button type="submit" style="color: white">Register</button>
+			<button type="submit" style="color: white"><b>Register</b></button>
 		</div>
 
-		<div class="container" style="background-color: #f1f1f1">
+		<div class="container" style="background-color: #f1f1f1;border: 1px solid white;">
 			<button type="button" class="cancelbtn">Cancel</button>
 		</div>
 	</form>

@@ -125,7 +125,7 @@ public class availability extends HttpServlet {
                 String start= request.getParameter("start");
                 String end = request.getParameter("end");
  
-                Schedule sh = new Schedule(room, courseId, sectionId, instructor, day, start, end);
+                Schedule sh = new Schedule(courseId, sectionId, instructor, day);
                 int status = db.updateSchedule(sh);
                 if(status != 0) {
                     session.setAttribute("Updated", status);

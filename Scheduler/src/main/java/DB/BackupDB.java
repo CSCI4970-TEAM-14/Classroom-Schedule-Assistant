@@ -13,6 +13,7 @@ import entities.Account;
 import entities.Classroom;
 import entities.Course;
 import entities.Schedule;
+import entities.Section;
 
 public class BackupDB{
 	String Driver = "com.mysql.jdbc.Driver";
@@ -53,7 +54,7 @@ public class BackupDB{
     }
 
     public boolean deleteDB(Classroom room) throws SQLException {
-        String sql = "DELETE FROM Classroom WHERE id = ?";
+        String sql = "DELETE FROM Classroom WHERE room = ?";
          
         connect();
          
@@ -84,7 +85,7 @@ public class BackupDB{
     }
     
     public boolean adjustCap(Classroom room) throws SQLException {
-        String sql = "UPDATE Classroom SET id = ?, seat = ?";
+        String sql = "UPDATE Classroom SET room = ?, seat = ?";
         sql += " WHERE id = ?";
         connect();
          
@@ -148,8 +149,8 @@ public class BackupDB{
     public boolean saveDB(Classroom cl) throws SQLException {
     	PreparedStatement statement = null;
         String sql = "INSERT INTO Classroom"
-                + "(room, type, seat, computers) "
-                + "VALUES" + "(?,?,?,?)";
+                + "(room, type, seat) "
+                + "VALUES" + "(?,?,?)";
 		 
 	        connect();  
 	        statement = jdbcConnection.prepareStatement(sql);
@@ -165,17 +166,20 @@ public class BackupDB{
 	}
 
 	public boolean saveSchedule(Schedule sh) throws SQLException {
-		String sql = "INSERT INTO Schedule (room, courseId, section, instructor,day,start,end) VALUES (?, ?, ?,?,?,?,?)";
+		String sql = "INSERT INTO Schedule (course, section,method,enroll, instructor,day,start,end, room) VALUES (?, ?, ?,?,?,?,?)";
         connect();
          
         PreparedStatement statement = jdbcConnection.prepareStatement(sql);
         statement.setInt(1, Integer.parseInt(sh.getRoom()));
         statement.setString(2,sh.getCourse());
         statement.setInt(3,Integer.parseInt(sh.getSection()));
-        statement.setString(4, sh.getInstructor());
-        statement.setString(5, sh.getDay());
-        statement.setInt(6, Integer.parseInt(sh.getStartTime()));
-        statement.setInt(7,Integer.parseInt(sh.getEndTime()));// active
+        statement.setString(4, sh.getMethod());
+        statement.setString(5, sh.getEnroll());
+        statement.setString(6, sh.getInstructor());
+        statement.setString(7, sh.getDay());
+        statement.setInt(8, Integer.parseInt(sh.getStartTime()));
+        statement.setInt(9,Integer.parseInt(sh.getEndTime()));// active
+        statement.setString(10, sh.getRoom());
         
         boolean rowInserted = statement.executeUpdate() > 0;
         statement.close();
@@ -186,11 +190,14 @@ public class BackupDB{
 	/*//************************************************************DELETE/REMOVE*********************************************************************\\*/
 
     public boolean deleteClass(Classroom room) throws SQLException {
-        String sql = "DELETE FROM Classroom WHERE id = ?";
+        String sql = "DELETE FROM Classroom WHERE room = ?,type =?"; //maybe Seat??
         connect();
          
             PreparedStatement statement = jdbcConnection.prepareStatement(sql);
+            //statement.setInt(1, room.getId());
             statement.setString(1, room.getId());
+            statement.setString(2, room.getType());
+            
             boolean rowDeleted = statement.executeUpdate() > 0;
         
         statement.close();
@@ -199,12 +206,33 @@ public class BackupDB{
     }
 
     public boolean deleteSchedule(Schedule shed) throws SQLException {
-        String sql = "DELETE FROM Schedule WHERE id = ?";
+        String sql = "DELETE FROM Schedule WHERE course = ?, section =?, instructor =?, day =?";
         PreparedStatement statement = null;
         connect();
         
             statement = jdbcConnection.prepareStatement(sql);
-            statement.setInt(1, shed.getId());
+            //statement.setInt(0, shed.getId());
+            statement.setString(1, shed.getCourse());
+            statement.setString(2, shed.getSection());
+            statement.setString(3, shed.getInstructor());
+            statement.setString(4, shed.getDay());
+            boolean rowDeleted = statement.executeUpdate() > 0;
+        
+        statement.close();
+        disconnect();
+        return rowDeleted;     
+    }
+    
+    public boolean deleteSection(Section sec) throws SQLException {
+        String sql = "DELETE FROM Section WHERE course = ?, section =?, method =?";//??
+        PreparedStatement statement = null;
+        connect();
+        
+            statement = jdbcConnection.prepareStatement(sql);
+          //statement.setInt(0, sec.getId());
+            statement.setString(1, sec.getCourseId());
+            statement.setString(2, sec.getSection());
+            statement.setString(3, sec.getMethod());
             boolean rowDeleted = statement.executeUpdate() > 0;
         
         statement.close();
@@ -591,4 +619,50 @@ public boolean addRoom(String room, String type,String seat,String computer) thr
         }
         return false;//0??
     }
+
+	public boolean saveSection(Section sh) throws SQLException {
+		PreparedStatement statement = null;
+        String sql = "INSERT INTO Section"
+                + "(course, section, method, enroll, instructor, term) "
+                + "VALUES" + "(?,?,?,?,?,?)";
+        connect();
+         
+        statement = jdbcConnection.prepareStatement(sql);
+        statement.setString(1, sh.getCourseId());
+        statement.setString(2, sh.getSection());
+        statement.setString(3, sh.getMethod());
+        statement.setString(4, sh.getEnroll());
+        statement.setString(5, sh.getInstructor());
+        statement.setString(6, sh.getTerm());
+         
+        boolean rowInserted = statement.executeUpdate() > 0;
+        
+        statement.close();
+        disconnect();
+        return rowInserted;
+	}
+
+	public boolean removeSchedule(Schedule sh) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean updateSection(Section sh) throws SQLException {
+		String sql = "UPDATE Section SET course = ?, section = ?, method = ?, enroll =?, instructor =?, term =?";
+        sql += " WHERE id = ?";
+        connect();
+        
+            PreparedStatement statement = jdbcConnection.prepareStatement(sql);
+            statement.setString(1, sh.getCourseId());
+            statement.setString(2, sh.getSection());
+            statement.setString(3, sh.getMethod());
+            statement.setString(4,  sh.getEnroll());
+            statement.setString(5, sh.getInstructor());
+            statement.setString(6,  sh.getTerm());
+            boolean rowUpdated = statement.executeUpdate() > 0;
+        
+        statement.close();
+        disconnect();
+        return rowUpdated;  
+	}
 }

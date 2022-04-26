@@ -28,7 +28,6 @@ public class adjustCapacity extends HttpServlet {
     	
     	String room = request.getParameter("room");
 		String seats = request.getParameter("seats");
-		//String computers = request.getParameter("comp");
 		
 		Classroom rm = new Classroom(room,seats);	
 	    

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add Classroom</title>
+    <title>Remove Schedule</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="userpages.css">
@@ -36,11 +36,11 @@
 
     <div class="topnav">
         <a href="userHome.jsp">Home</a>
-        <a href="update.jsp">Return</a>
+        <a href="remove.jsp">Return</a>
     </div>
 
     <div class="h">
-        <h2>Add Room</h2>
+        <h2>Remove Schedule</h2>
     </div>
 
     <section>
@@ -56,15 +56,15 @@
     		if (session.getAttribute("Failed") != null) {
     			session.setAttribute("Failed", null);
     		%>
-    			<p style="color:red">**Classroom not added!**</p>
+    			<p style="color:red">**Schedule not removed!**</p>
     		<%
     		}
     		%>
     		<%
-    		if (session.getAttribute("Added") != null) {
-    			session.setAttribute("Added", null);
+    		if (session.getAttribute("Removed") != null) {
+    			session.setAttribute("Removed", null);
     		%>
-    			<p style="color:green">**Added Classroom!**</p>
+    			<p style="color:green">**Removed Schedule!**</p>
     		<%
     		}
     		%>
@@ -72,18 +72,21 @@
 			<%if (session != null){
 					session.invalidate();} %>
 					 
-            <form action="./addRoom" method="post">
+            <form action="./removeSchedule" method="post">
                 <div class="container">
-                    <label for="room"><b>Room number</b></label>
-                    <input type="text" placeholder="" name="room" required>
+                    <label for="course"><b>Course Id</b></label>
+                    <input type="text" placeholder="" name="course" required>
 
-                    <label for="type"><b>Type</b></label>
-                    <input type="text" placeholder="" name="type" required>
+                    <label for="sec"><b>Section id</b></label>
+                    <input type="text" placeholder="" name="sec" required>
 
-                    <label for="seat"><b>Seats</b></label>
-                    <input type="text" placeholder="" name="seat" required>
+                    <label for="in"><b>Instructor</b></label>
+                    <input type="text" placeholder="" name="in" required>
+                    
+                    <label for="day"><b>Day</b></label>
+                    <input type="text" placeholder="" name="day" required>
 
-                    <button type="submit" style="color:white">Add</button>
+                    <button type="submit" style="color:white">Remove</button>
                 </div>
             </form>
         </article>

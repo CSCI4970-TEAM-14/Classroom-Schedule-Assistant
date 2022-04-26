@@ -5,14 +5,16 @@
 <title>Login Page</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="CSA_2.css">
-<link rel="stylesheet" href="CSA_1.css">
+<link rel="stylesheet" href="out.css">
+<link rel="stylesheet" href="input.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 
 	<div class="header">
-		<h1>Classroom Scheduler</h1>
+		<h1>
+		Classroom Scheduler <img src="logo.jpg" alt="" width="45" height="45">
+		</h1>
 	</div>
 
 	<div class="topnav">
@@ -20,7 +22,7 @@
 	</div>
 
 	<div class="column middle">
-		<h2 style="color: red">Login</h2>
+		<h2 style="color: black">Login</h2>
 					
 			
 			<%if (session.getAttribute("invalid") != null){
@@ -43,7 +45,10 @@
 			    <label for="password"><b>Password</b></label>
 			    <input type="password" placeholder="Enter password" name="password" required>
 
-				<button type="submit" style="color: white">Login</button>
+				<button type="submit" style="color: white"><b>Login</b></button>
+				<label>
+                <input type="checkbox" checked="checked" name="remember"> Remember me
+    			</label>
 			</div>
 
 			<div class="container"

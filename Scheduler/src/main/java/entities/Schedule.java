@@ -6,13 +6,15 @@ import java.io.Serializable;
  * CREATE TABLE Schedule 
  * (	
  * 		id int Auto increment NOT NULL,
- * 		room int NOT NULL,
  * 		courseId varchar(),
  * 		sectId int,
+ * 		method varchar() NOT NULL,
+ * 		enroll int NOT NULL,
  * 		instructor varchar(),
  * 		day varchar(50) NOT NULL,
  * 		start varchar(),
  * 		end varchar(),
+ * 		room int NOT NULL,
  * 		FOREIGN KEY(sectionId) REFERENCES Course(sectionId),
  * 		FOREIGN KEY(room) REFERENCES Classroom(Id),
  * 		FOREIGN KEY(courseId) REFERENCES Course(Id),
@@ -25,6 +27,8 @@ public class Schedule implements Serializable{
 	private String room;
 	private String courseId;
 	private String section;
+	private String method;
+	private String enroll;
 	private String instructor;
 	private String day;
 	private String startTime;
@@ -33,11 +37,16 @@ public class Schedule implements Serializable{
 	public Schedule() {
 	}
 
-	public Schedule(String room, String courseId, String section, String instructor, String day, String startTime, String endTime) {
+	public Schedule(String courseId, String section,String method,String enroll, String instructor, String day, String startTime, String endTime, String room) {
+		this.courseId = courseId;
+		this.section = section;
+		this.method = method;
+		this.enroll = enroll;
+		this.instructor = instructor;
 		this.day = day;
 		this.startTime = startTime;
 		this.endTime = endTime;
-		this.section = section;
+		this.room = room;
 	}
 
 	public Schedule(String day, String startTime, String endTime) {
@@ -46,12 +55,35 @@ public class Schedule implements Serializable{
 		this.endTime = endTime;
 	}
 	
+	public Schedule(String courseId, String section, String instructor, String day) {
+		this.courseId = courseId;
+		this.section = section;
+		this.instructor = instructor;
+		this.day = day;
+	}
+	
 	public String getRoom() {
 		return room;
 	}
 
 	public void setRoom(String room) {
 		this.room = room;
+	}
+	
+	public String getMethod() {
+		return method;
+	}
+
+	public void setMethod(String method) {
+		this.method = method;
+	}
+	
+	public String getEnroll() {
+		return enroll;
+	}
+
+	public void setEnroll(String enroll) {
+		this.enroll = enroll;
 	}
 	
 	public String getCourse() {

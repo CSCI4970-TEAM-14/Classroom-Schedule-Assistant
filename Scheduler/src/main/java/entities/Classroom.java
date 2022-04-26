@@ -5,6 +5,7 @@ import java.io.Serializable;
 /**
  * CREATE TABLE Class 
  * (	id int(),
+ * 		room varchar(),
  * 		type varchar(50),
  *      seat int(20),
  *      computers int(),
@@ -24,16 +25,15 @@ public class Classroom implements Serializable{
 	public Classroom() {
 	}
 
-	public Classroom(String id, String type, String seat, String computers) {
+	public Classroom(String id, String type, String seat) {
 		this.id = id;
 		this.type = type;
 		this.seat = seat;
-		this.computers = computers;
 	}
 	
-	public Classroom(String id, String seat) {
+	public Classroom(String id, String type) {
 		this.id = id;
-		this.seat = seat;
+		this.type = type;
 	}
 	
 	public Classroom(String id) {

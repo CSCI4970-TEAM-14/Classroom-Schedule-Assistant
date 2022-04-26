@@ -29,26 +29,22 @@
 	</header>
 
 	<div class="topnav">
-		<a href="userHome.jsp">Home</a> 
-		<a href="addClass.jsp">Add Classrooms</a>
-		<a href="adjustClass.jsp">Adjust Capacity</a>
+		<a href="userHome.jsp"><i class="fa fa-home"></i>Home</a> 
+		<a href="classView.jsp">View Classrooms</a>
+		<a href="remove.jsp">Remove Data</a>
 		<a href="update.jsp">Update Data</a> 
 		<a href="schedule.jsp">Scheduler</a>
 	</div>
-
-	<form action="/add" method="get">
-		<label for="select">Choose your option from the list:</label> <input
+	<form action="update.jsp" method="get">
+			<label for="select">Choose your option from the list:</label> <input
 			list="selections" name="select" id="select">
-		<datalist id="selections">
-			<option value="List Schedules">
-			<option value="Add Schedules" <a href="addSchedule.jsp"></a>> 
-    
-			<option value="Remove Schedules">
-    
-			<option value="Update Schedules">  
+			<datalist id="selections">
+				<option value="Add Schedules"></option>
+				<option value="Remove Schedules"></option>
+				<option value="Update Schedules"> </option>
 		</datalist>
-  <input type="submit">
-</form>
+		<input type="submit">
+		</form>
 
 <div class="h">
         <h2><i>PKI Classroom Schedule</i> </h2>

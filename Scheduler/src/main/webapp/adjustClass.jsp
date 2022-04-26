@@ -49,7 +49,7 @@
 	<section>
 		<nav>
 			<div class="topnav">
-				<a href="addClass.jsp">View All Classrooms</a>
+				<a href="classView.jsp">View All Classrooms</a>
 				<a href="update.jsp">Update Classrooms</a>
 				<a href="remove.jsp">Remove Classrooms </a>
 			</div>
@@ -57,27 +57,23 @@
 
 		<%if (session.getAttribute("Failed") != null){
                 session.setAttribute("Failed", null); %>
-		<p style="color: red">
-			<i>..Failed to adjust Classroom Capacity!..</i>
-		</p>
+		<p style="color: red"><i>..Failed to adjust Classroom Capacity!..</i></p>
 		<% } %>
 
 		<%if (session.getAttribute("Adjusted") != null){
-                        session.setAttribute("Adjusted", null); %>
-		<p style="color: green">
-			<i>..Classroom Adjusted!..</i>
-		</p>
+              session.setAttribute("Adjusted", null); %>
+		<p style="color: green"><i>..Classroom Adjusted!..</i></p>
 		<% } %>
 
 		<%if (session != null){
-						session.invalidate();} %>
+				session.invalidate();} %>
 		<article>
 			<form action="./adjustCap" method="post">
 				<div class="container">
 					<label for="room"><b>Room no.</b></label> 
-					<input type="text" placeholder="" name="id" required> 
-					<label for="cap"><b>Capacity</b></label>
-				    <input type="text" placeholder="" name="cap" required>
+					<input type="text" placeholder="" name="room" required> 
+					<label for="seats"><b>Capacity</b></label>
+				    <input type="text" placeholder="" name="seats" required>
 					
 					<button type="submit" style="color: white">Adjust</button>
 				</div>

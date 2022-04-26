@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add Classroom</title>
+    <title>Update Section</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="userpages.css">
@@ -40,7 +40,7 @@
     </div>
 
     <div class="h">
-        <h2>Add Room</h2>
+        <h2>Update Section</h2>
     </div>
 
     <section>
@@ -56,15 +56,15 @@
     		if (session.getAttribute("Failed") != null) {
     			session.setAttribute("Failed", null);
     		%>
-    			<p style="color:red">**Classroom not added!**</p>
+    			<p style="color:red">**Section not updated!**</p>
     		<%
     		}
     		%>
     		<%
-    		if (session.getAttribute("Added") != null) {
-    			session.setAttribute("Added", null);
+    		if (session.getAttribute("Updated") != null) {
+    			session.setAttribute("Updated", null);
     		%>
-    			<p style="color:green">**Added Classroom!**</p>
+    			<p style="color:green">**Updated Section!**</p>
     		<%
     		}
     		%>
@@ -72,18 +72,27 @@
 			<%if (session != null){
 					session.invalidate();} %>
 					 
-            <form action="./addRoom" method="post">
+            <form action="./updateSection" method="post">
                 <div class="container">
-                    <label for="room"><b>Room number</b></label>
-                    <input type="text" placeholder="" name="room" required>
+                    <label for="crs"><b>Course Id</b></label>
+                    <input type="text" placeholder="" name="crs" required>
 
-                    <label for="type"><b>Type</b></label>
-                    <input type="text" placeholder="" name="type" required>
+                    <label for="sec"><b>Section Id</b></label>
+                    <input type="text" placeholder="" name="sec" required>
 
-                    <label for="seat"><b>Seats</b></label>
-                    <input type="text" placeholder="" name="seat" required>
+                    <label for="meth"><b>Method</b></label>
+                    <input type="text" placeholder="" name="meth" required>
+                    
+                    <label for="enr"><b>Enroll</b></label>
+                    <input type="text" placeholder="" name="enr" required>
+                    
+                    <label for="inst"><b>Instructor</b></label>
+                    <input type="text" placeholder="" name="inst" required>
+                    
+                    <label for="term"><b>Term</b></label>
+                    <input type="text" placeholder="" name="term" required>
 
-                    <button type="submit" style="color:white">Add</button>
+                    <button type="submit" style="color:white">Update</button>
                 </div>
             </form>
         </article>

@@ -14,8 +14,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="out.css">
-<link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<title>Classroom Schedule View</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<title>Classroom View</title>
 </head>
 <body>
 	<div class="header">
@@ -24,47 +25,36 @@
 		</h1>
 	</div>
 
-	<div class="topnav">
-		<a href="https://www.unomaha.edu"><i class="fa fa-home"></i>Home</a> <a href="register.jsp">Register</a>
-		<a href="login.jsp">Login</a>
-	</div>
+	 <div class="topnav">
+        <a href="userHome.jsp">Home</a>
+        <a href="update.jsp">Return</a>
+    </div>
 
 	<div class="h">
 		<h2>
-			<i>PKI Classroom Schedule</i>
+			<i>PKI Classrooms</i>
 		</h2>
 	</div>
 
-	<sql:setDataSource var="Schedule" driver="com.mysql.jdbc.Driver"
+	<sql:setDataSource var="Classroom" driver="com.mysql.jdbc.Driver"
 		url="jdbc:mysql://ec2-3-129-194-150.us-east-2.compute.amazonaws.com:3306/CSA?useSSL=false"
 		user="nangatid" password="TKey" />
 
-	<sql:query var="ListSchedule" dataSource="${Schedule}">
-        SELECT * FROM Schedule;
+	<sql:query var="ListClassroom" dataSource="${Classroom}">
+        SELECT * FROM Classroom;
     </sql:query>
 	<div align="center">
 		<table border="1" cellpadding="5">
 			<tr>
-				<th>Course</th>
-				<th>Section</th>
-				<th>Method</th>
-				<th>Enrollment</th>
-				<th>Instructor</th>
-				<th>Meeting</th>
-				<th></th>
-				<th>Classroom</th>
+				<th>Room No.</th>
+				<th>Type</th>
+				<th>Capacity</th>
 			</tr>
-			<c:forEach var="sched" items="${ListSchedule.rows}">
+			<c:forEach var="cla" items="${ListClassroom.rows}">
 				<tr>
-					<td><c:out value="${sched.course}" /></td>
-					<td><c:out value="${sched.section}" /></td>
-					<td><c:out value="${sched.method}" /></td>
-					<td><c:out value="${sched.enroll}" /></td>
-					<td><c:out value="${sched.instructor}" /></td>
-					<td><c:out value="${sched.day}" /></td>
-					<td><c:out value="${sched.start}"/> - <c:out value="${sched.end}" /></td>
-					<td><c:out value="${sched.room}" /></td>
-
+					<td><c:out value="${cla.room}" /></td>
+					<td><c:out value="${cla.type}" /></td>
+					<td><c:out value="${cla.seat}" /></td>
 				</tr>
 			</c:forEach>
 		</table>

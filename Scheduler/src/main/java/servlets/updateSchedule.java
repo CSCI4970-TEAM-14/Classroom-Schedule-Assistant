@@ -1,11 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-//import java.sql.SQLException;
-//import java.util.List;
 import java.sql.SQLException;
-
-//import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,13 +12,13 @@ import javax.servlet.http.HttpSession;
 import DB.BackupDB;
 import entities.Schedule;
 
-@WebServlet("/addSchedule")
-public class addSchedule extends HttpServlet {
+@WebServlet("/updateSchedule")
+public class updateSchedule extends HttpServlet {
 private static final long serialVersionUID = 1L;
 private BackupDB db;
 
-public addSchedule() {
-    super();
+public updateSchedule() {
+  super();
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -42,14 +38,14 @@ throws ServletException, IOException {
 		Schedule sh = new Schedule(course,section,method,enroll, instructor,day, start,end,room);	
 		    
 			try {
-				boolean status = db.saveSchedule(sh);
-				if(status) {
-					session.setAttribute("Added", status);
-					response.sendRedirect("addSchedule.jsp");
+				int status = db.updateSchedule(sh);
+				if(status != 0) {
+					session.setAttribute("Updated", status);
+					response.sendRedirect("updateSchedule.jsp");
 					
 				} else {
 					session.setAttribute("Failed", status);
-					response.sendRedirect("addSchedule.jsp");
+					response.sendRedirect("updateSchedule.jsp");
 				}
 			} catch (IOException | SQLException e) {
 				e.printStackTrace();
@@ -58,7 +54,7 @@ throws ServletException, IOException {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 throws ServletException, IOException {
-		 response.sendRedirect("addSchedule.jsp");
+		 response.sendRedirect("updateSchedule.jsp");
 		
 	}
 }

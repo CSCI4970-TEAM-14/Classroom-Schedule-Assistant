@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+//import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,12 +13,12 @@ import javax.servlet.http.HttpSession;
 import DB.BackupDB;
 import entities.Classroom;
 
-@WebServlet("/addRoom")
-public class addRoom extends HttpServlet {
+@WebServlet("/removeClass")
+public class removeClass extends HttpServlet {
   private static final long serialVersionUID = 1L;
   private BackupDB db;
 
-  public addRoom() {
+  public removeClass() {
       super();
 	}
 	
@@ -28,29 +29,20 @@ public class addRoom extends HttpServlet {
 	    String room = request.getParameter("room");
 	    String type = request.getParameter("type");
 		String seats = request.getParameter("seat");
-		
-		/*int roomId = 0;
-		int seat = 0;
-		int comp = 0;
-        
-        try { 
-        	roomId = Integer.parseInt(room);
-        	seat = Integer.parseInt(seats);
-        	} catch (NumberFormatException nfe)
-        { nfe.printStackTrace(); }*/	
+	
 		Classroom rm = new Classroom(room,type,seats);
 		System.out.println("Entered:" + room + ","+ type + "," + seats);
         
 		    
 			try {
-				boolean status = db.saveDB(rm);
+				boolean status = db.deleteClass(rm);
 				if(status) {
-					session.setAttribute("Added", status);
-					response.sendRedirect("addClass.jsp");
+					session.setAttribute("Removed", status);
+					response.sendRedirect("removeClass.jsp");
 					
 				} else {
 					session.setAttribute("Failed", status);
-					response.sendRedirect("addClass.jsp");
+					response.sendRedirect("removeClass.jsp");
 				}
 			} catch (SQLException | IOException e) {
 				e.printStackTrace();
@@ -59,7 +51,7 @@ public class addRoom extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
   throws ServletException, IOException {
-		 response.sendRedirect("addClass.jsp");
+		 response.sendRedirect("removeClass.jsp");
 		
 	}
 }

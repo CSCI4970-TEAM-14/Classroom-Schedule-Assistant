@@ -4,7 +4,7 @@
 <html>
 
 <head>
-<title>Add Schedules</title>
+<title>Update Schedules</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="userpages.css">
@@ -43,7 +43,7 @@
 	</div>
 
 	<div class="h">
-		<h2>Add Schedule</h2>
+		<h2>Update Schedule</h2>
 	</div>
 
 	<section>
@@ -57,17 +57,17 @@
 
 		<%if (session.getAttribute("Failed") != null){
                 session.setAttribute("Failed", null); %>
-		<p style="color: red"><i>..Failed to add Schedule!..</i>	</p>
+		<p style="color: red"><i>..Failed to update Schedule!..</i>	</p>
 		<% } %>
 
-		<%if (session.getAttribute("Added") != null){
-              session.setAttribute("Added", null); %>
-		<p style="color: green"><i>..Schedule Added!..</i></p>
+		<%if (session.getAttribute("Updated") != null){
+              session.setAttribute("Updated", null); %>
+		<p style="color: green"><i>..Schedule Updated!..</i></p>
 		<% } %>
 		<article>
-			<form action="./addSchedule" method="post">
+			<form action="./updateSchedule" method="post">
 				<div class="container">
-					<label for="course"><b>Course ID</b></label>
+					 <label for="course"><b>Course ID</b></label>
 					 <input type="text" placeholder="" name="course" required>
 					 <label for="sec"><b>Section ID</b></label>
 					 <input type="text" placeholder="" name="sec" required>
@@ -79,14 +79,14 @@
 					 <input type="text" placeholder="" name="in" required>
 					<label for="day"><b>Day</b></label>
 					 <input type="text" placeholder="" name="day" required>
-					<label for="start"><b>Start Time</b></label> <input type="text"
+					<label for="setAttribute"><b>Start Time</b></label> <input type="text"
 						placeholder="time" name="start" required>
 					 <label for="end"><b>EndTime</b></label>
 					 <input type="text" placeholder="" name="end" required>
 					 <label for="room"><b>Room</b></label>
 					 <input type="text" placeholder="" name="room" required>
 
-					<button type="submit" style="color: white">Add</button>
+					<button type="submit" style="color: white">Update</button>
 				</div>
 			</form>
 		</article>

@@ -9,6 +9,7 @@ import java.io.Serializable;
  * 		title varchar(),
  * 		term varchar(),
  * 		PRIMARY KEY (sectId));
+ * 		Foreign Key(sectionId) References Section(secId);
  */
 public class Course implements Serializable{
 	
