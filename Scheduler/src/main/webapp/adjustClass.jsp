@@ -75,7 +75,7 @@
 					<label for="seats"><b>Capacity</b></label>
 				    <input type="text" placeholder="" name="seats" required>
 					
-					<button type="submit" style="color: white">Adjust</button>
+					<button id="adjustBtn" type="submit" style="color: white">Adjust</button>
 				</div>
 			</form>
 		</article>

@@ -86,7 +86,7 @@
 					 <label for="room"><b>Room</b></label>
 					 <input type="text" placeholder="" name="room" required>
 
-					<button type="submit" style="color: white">Add</button>
+					<button id="addBtn"type="submit" style="color: white">Add</button>
 				</div>
 			</form>
 		</article>
