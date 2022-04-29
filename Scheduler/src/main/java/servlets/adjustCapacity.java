@@ -29,7 +29,15 @@ public class adjustCapacity extends HttpServlet {
     	String room = request.getParameter("room");
 		String seats = request.getParameter("seats");
 		
-		Classroom rm = new Classroom(room,seats);	
+		int cap = 0;
+        
+        try { 
+        	cap = Integer.parseInt(seats);
+        	} catch (NumberFormatException nfe)
+        { nfe.printStackTrace(); }
+		
+		Classroom rm = new Classroom(room,cap);	
+		db = new BackupDB();
 	    
 		try {
 			boolean status = db.adjustCap(rm);

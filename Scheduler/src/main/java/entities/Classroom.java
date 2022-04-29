@@ -18,22 +18,22 @@ public class Classroom implements Serializable{
 
 	private String type;
 
-	private String seat;
+	private int seat;
 	
 	private String computers;
 
 	public Classroom() {
 	}
 
-	public Classroom(String id, String type, String seat) {
+	public Classroom(String id, String type, int seat) {
 		this.id = id;
 		this.type = type;
 		this.seat = seat;
 	}
 	
-	public Classroom(String id, String type) {
+	public Classroom(String id, int seat) {
 		this.id = id;
-		this.type = type;
+		this.seat = seat;
 	}
 	
 	public Classroom(String id) {
@@ -56,11 +56,11 @@ public class Classroom implements Serializable{
 		this.type = type;
 	}
 	
-	public String getSeat() {
+	public int getSeat() {
 		return seat;
 	}
-
-	public void setSeats(String seat) {
+	
+	public void setSeats(int seat) {
 		this.seat = seat;
 	}
 

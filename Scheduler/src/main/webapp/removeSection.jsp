@@ -56,7 +56,7 @@
     		if (session.getAttribute("Failed") != null) {
     			session.setAttribute("Failed", null);
     		%>
-    			<p style="color:red">**Section not removed!**</p>
+    			<p style="color:red"><b>**Section NOT removed!**</b></p>
     		<%
     		}
     		%>
@@ -64,7 +64,7 @@
     		if (session.getAttribute("Removed") != null) {
     			session.setAttribute("Removed", null);
     		%>
-    			<p style="color:green">**Removed Section!**</p>
+    			<p style="color:green"><b>**Section REMOVED!**</b></p>
     		<%
     		}
     		%>
@@ -79,9 +79,6 @@
 
                     <label for="sec"><b>Section id</b></label>
                     <input type="text" placeholder="" name="sec" required>
-                    
-                    <label for="meth"><b>Method</b></label>
-                    <input type="text" placeholder="" name="meth" required>
 
                     <button type="submit" style="color:white">Remove</button>
                 </div>

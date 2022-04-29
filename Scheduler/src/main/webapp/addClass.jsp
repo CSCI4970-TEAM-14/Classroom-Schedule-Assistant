@@ -7,8 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="userpages.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
     <style>
         @media screen and (max-width: 600px) {
             .topnav .search-container {
@@ -56,7 +55,7 @@
     		if (session.getAttribute("Failed") != null) {
     			session.setAttribute("Failed", null);
     		%>
-    			<p style="color:red">**Classroom not added!**</p>
+    			<p style="color:red">**Classroom NOT added!**</p>
     		<%
     		}
     		%>
@@ -64,7 +63,7 @@
     		if (session.getAttribute("Added") != null) {
     			session.setAttribute("Added", null);
     		%>
-    			<p style="color:green">**Added Classroom!**</p>
+    			<p style="color:green"><b>**Classroom ADDED!**</b></p>
     		<%
     		}
     		%>

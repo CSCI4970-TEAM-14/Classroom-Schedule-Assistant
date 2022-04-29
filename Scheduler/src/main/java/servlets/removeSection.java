@@ -27,9 +27,9 @@ throws ServletException, IOException {
 		
 	    String course = request.getParameter("course");
 		String section = request.getParameter("sec");
-		String method = request.getParameter("meth");
 			
-		Section sh = new Section(course,section,method);	
+		Section sh = new Section(section, course);	
+		db = new BackupDB();
 		    
 			try {
 				boolean status = db.deleteSection(sh);

@@ -57,34 +57,34 @@
 
 		<%if (session.getAttribute("Failed") != null){
                 session.setAttribute("Failed", null); %>
-		<p style="color: red"><i>..Failed to add Schedule!..</i>	</p>
+		<p style="color: red"><b>..FAILED to add Schedule!..</b>	</p>
 		<% } %>
 
 		<%if (session.getAttribute("Added") != null){
               session.setAttribute("Added", null); %>
-		<p style="color: green"><i>..Schedule Added!..</i></p>
+		<p style="color: green"><b>..Schedule ADDED!..</b></p>
 		<% } %>
 		<article>
 			<form action="./addSchedule" method="post">
 				<div class="container">
-					<label for="course"><b>Course ID</b></label>
-					 <input type="text" placeholder="" name="course" required>
-					 <label for="sec"><b>Section ID</b></label>
-					 <input type="text" placeholder="" name="sec" required>
+					<label for="course"><b>Course</b></label>
+					 <input type="text" placeholder="e.g CSCI 0000" name="course" required>
+					 <label for="sec"><b>Section</b></label>
+					 <input type="text" placeholder="#" name="sec" required>
 					 <label for="meth"><b>Method</b></label>
 					 <input type="text" placeholder="" name="meth" required>
-					 <label for="enr"><b>Enrollment</b></label>
-					 <input type="text" placeholder="" name="enr" required>
+					 <label for="enr"><b>Enroll</b></label>
+					 <input type="text" placeholder="#" name="enr" required>
 					 <label for="in"><b>Instructor</b></label>
-					 <input type="text" placeholder="" name="in" required>
+					 <input type="text" placeholder="last first" name="in" required>
 					<label for="day"><b>Day</b></label>
-					 <input type="text" placeholder="" name="day" required>
-					<label for="start"><b>Start Time</b></label> <input type="text"
-						placeholder="time" name="start" required>
-					 <label for="end"><b>EndTime</b></label>
-					 <input type="text" placeholder="" name="end" required>
+					 <input type="text" placeholder="e.g MW" name="day" required>
+					<label for="start"><b>Start</b></label> <input type="text"
+						placeholder="0:00pm" name="start" required>
+					 <label for="end"><b>End</b></label>
+					 <input type="text" placeholder="0:00pm" name="end" required>
 					 <label for="room"><b>Room</b></label>
-					 <input type="text" placeholder="" name="room" required>
+					 <input type="text" placeholder="e.g PKI 000" name="room" required>
 
 					<button type="submit" style="color: white">Add</button>
 				</div>

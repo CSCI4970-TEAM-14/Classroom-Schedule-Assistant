@@ -38,9 +38,18 @@ throws ServletException, IOException {
 	    String start = request.getParameter("start");
 		String end = request.getParameter("end");
 		String room = request.getParameter("room");
-			
-		Schedule sh = new Schedule(course,section,method,enroll, instructor,day, start,end,room);	
-		    
+		
+		int cap = 0;
+        
+        try { 
+        	cap = Integer.parseInt(enroll);
+        	} catch (NumberFormatException nfe)
+        { nfe.printStackTrace(); }
+		
+		System.out.println("Entered:" + course + ","+ section + "," + instructor + "," + day);
+		Schedule sh = new Schedule(course,section,method,cap, instructor,day, start,end,room);	
+		   
+		db = new BackupDB();
 			try {
 				boolean status = db.saveSchedule(sh);
 				if(status) {

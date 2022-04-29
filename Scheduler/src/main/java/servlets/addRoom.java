@@ -29,19 +29,17 @@ public class addRoom extends HttpServlet {
 	    String type = request.getParameter("type");
 		String seats = request.getParameter("seat");
 		
-		/*int roomId = 0;
-		int seat = 0;
-		int comp = 0;
+		int cap = 0;
         
         try { 
-        	roomId = Integer.parseInt(room);
-        	seat = Integer.parseInt(seats);
+        	cap = Integer.parseInt(seats);
         	} catch (NumberFormatException nfe)
-        { nfe.printStackTrace(); }*/	
-		Classroom rm = new Classroom(room,type,seats);
+        { nfe.printStackTrace(); }
+        
+		Classroom rm = new Classroom(room,type,cap);
 		System.out.println("Entered:" + room + ","+ type + "," + seats);
         
-		    
+		    db = new BackupDB();
 			try {
 				boolean status = db.saveDB(rm);
 				if(status) {

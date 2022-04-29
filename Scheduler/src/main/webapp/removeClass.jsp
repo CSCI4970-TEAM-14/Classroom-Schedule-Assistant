@@ -56,7 +56,7 @@
     		if (session.getAttribute("Failed") != null) {
     			session.setAttribute("Failed", null);
     		%>
-    			<p style="color:red">**Classroom not removed!**</p>
+    			<p style="color:red"><b>**Classroom NOT removed!**</b></p>
     		<%
     		}
     		%>
@@ -64,7 +64,7 @@
     		if (session.getAttribute("Removed") != null) {
     			session.setAttribute("Removed", null);
     		%>
-    			<p style="color:green">**Removed Classroom!**</p>
+    			<p style="color:green"><b>** Classroom REMOVED!**</b></p>
     		<%
     		}
     		%>
@@ -76,12 +76,6 @@
                 <div class="container">
                     <label for="room"><b>Room number</b></label>
                     <input type="text" placeholder="" name="room" required>
-
-                    <label for="type"><b>Type</b></label>
-                    <input type="text" placeholder="" name="type" required>
-                    
-                    <label for="seat"><b>Seat</b></label>
-                    <input type="text" placeholder="" name="seat" required>
 
                     <button type="submit" style="color:white">Remove</button>
                 </div>

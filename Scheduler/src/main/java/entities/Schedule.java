@@ -28,7 +28,7 @@ public class Schedule implements Serializable{
 	private String courseId;
 	private String section;
 	private String method;
-	private String enroll;
+	private int enroll;
 	private String instructor;
 	private String day;
 	private String startTime;
@@ -37,7 +37,7 @@ public class Schedule implements Serializable{
 	public Schedule() {
 	}
 
-	public Schedule(String courseId, String section,String method,String enroll, String instructor, String day, String startTime, String endTime, String room) {
+	public Schedule(String courseId, String section,String method,int enroll, String instructor, String day, String startTime, String endTime, String room) {
 		this.courseId = courseId;
 		this.section = section;
 		this.method = method;
@@ -53,6 +53,11 @@ public class Schedule implements Serializable{
 		this.day = day;
 		this.startTime = startTime;
 		this.endTime = endTime;
+	}
+	
+	public Schedule(String course, String section) {
+		this.courseId = course;
+		this.section = section;
 	}
 	
 	public Schedule(String courseId, String section, String instructor, String day) {
@@ -78,11 +83,11 @@ public class Schedule implements Serializable{
 		this.method = method;
 	}
 	
-	public String getEnroll() {
+	public int getEnroll() {
 		return enroll;
 	}
 
-	public void setEnroll(String enroll) {
+	public void setEnroll(int enroll) {
 		this.enroll = enroll;
 	}
 	

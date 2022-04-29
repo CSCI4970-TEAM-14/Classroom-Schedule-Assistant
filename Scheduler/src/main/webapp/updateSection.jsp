@@ -56,7 +56,7 @@
     		if (session.getAttribute("Failed") != null) {
     			session.setAttribute("Failed", null);
     		%>
-    			<p style="color:red">**Section not updated!**</p>
+    			<p style="color:red"><b>**Section NOT updated!**</b></p>
     		<%
     		}
     		%>
@@ -64,7 +64,7 @@
     		if (session.getAttribute("Updated") != null) {
     			session.setAttribute("Updated", null);
     		%>
-    			<p style="color:green">**Updated Section!**</p>
+    			<p style="color:green"><b>**Section UPDATED!**</b></p>
     		<%
     		}
     		%>

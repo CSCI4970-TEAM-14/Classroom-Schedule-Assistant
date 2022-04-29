@@ -34,12 +34,20 @@ throws ServletException, IOException {
 	    String start = request.getParameter("start");
 		String end = request.getParameter("end");
 		String room = request.getParameter("room");
+		
+		int cap = 0;
+        
+        try { 
+        	cap = Integer.parseInt(enroll);
+        	} catch (NumberFormatException nfe)
+        { nfe.printStackTrace(); }
 			
-		Schedule sh = new Schedule(course,section,method,enroll, instructor,day, start,end,room);	
+		Schedule sh = new Schedule(course,section,method, cap, instructor,day, start,end,room);	
+		db = new BackupDB();
 		    
 			try {
-				int status = db.updateSchedule(sh);
-				if(status != 0) {
+				boolean status = db.updateSchedule(sh);
+				if(status) {
 					session.setAttribute("Updated", status);
 					response.sendRedirect("updateSchedule.jsp");
 					

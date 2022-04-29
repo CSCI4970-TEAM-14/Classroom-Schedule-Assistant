@@ -57,12 +57,12 @@
 
 		<%if (session.getAttribute("Failed") != null){
                 session.setAttribute("Failed", null); %>
-		<p style="color: red"><i>..Failed to adjust Classroom Capacity!..</i></p>
+		<p style="color: red"><b>**FAILED to adjust Classroom Capacity!**</b></p>
 		<% } %>
 
 		<%if (session.getAttribute("Adjusted") != null){
               session.setAttribute("Adjusted", null); %>
-		<p style="color: green"><i>..Classroom Adjusted!..</i></p>
+		<p style="color: green"><b>**Classroom ADJUSTED..!**</b></p>
 		<% } %>
 
 		<%if (session != null){

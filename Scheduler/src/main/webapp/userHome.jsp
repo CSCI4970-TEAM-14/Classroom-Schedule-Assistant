@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="servlets.Log" %>
 <%@ page import="entities.Schedule" %>
@@ -37,15 +38,27 @@
                 <li class="b"><a href="update.jsp" style="color: white">Update </a></li>
                 <li class="b"><a href="remove.jsp" style="color: white">Remove</a></li>
                 <li class="b"><a href="export.jsp" style="color: white">Export</a></li>
-                <li class="b"><a href="export.jsp" style="color: white">Import</a></li>
+                <li class="b"><a href="import.jsp" style="color: white">Import</a></li>
                 </div>
             </ul>
         </nav>
+        <div class="h">
+		<h2>
+			<i>PKI Classroom Schedule</i>
+		</h2>
+		</div>
+        <sql:setDataSource var="Schedule" driver="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://ec2-3-129-194-150.us-east-2.compute.amazonaws.com:3306/CSA?useSSL=false"
+		user="nangatid" password="TKey" />
+
+		<sql:query var="ListSchedule" dataSource="${Schedule}">
+        	SELECT * FROM Schedule;
+    	</sql:query>
 
         <article>
             <table class="center">
       			<tr>
-                                <th>Course</th>
+				<th>Course</th>
 				<th>Section</th>
 				<th>Method</th>
 				<th>Enrollment</th>
@@ -64,10 +77,9 @@
 					<td><c:out value="${sched.day}" /></td>
 					<td><c:out value="${sched.start}"/> - <c:out value="${sched.end}" /></td>
 					<td><c:out value="${sched.room}" /></td>
-
 				</tr>
 			</c:forEach>
-                        </table>
+           </table>
         </article>
     </section>
 </body>

@@ -56,7 +56,7 @@
     		if (session.getAttribute("Failed") != null) {
     			session.setAttribute("Failed", null);
     		%>
-    			<p style="color:red">**Section not added!**</p>
+    			<p style="color:red"><b>**Section NOT added!**</b></p>
     		<%
     		}
     		%>
@@ -64,7 +64,7 @@
     		if (session.getAttribute("Added") != null) {
     			session.setAttribute("Added", null);
     		%>
-    			<p style="color:green">**Added Section!**</p>
+    			<p style="color:green"><b>** Section ADDED!**</b></p>
     		<%
     		}
     		%>

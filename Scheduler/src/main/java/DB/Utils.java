@@ -169,7 +169,7 @@ public class Utils {
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, room.getId());
         statement.setString(2, room.getType());
-        statement.setString(3, room.getSeat());
+        statement.setInt(3, room.getSeat());
         statement.setString(4,room.getComputers());
         System.out.println(statement);
          

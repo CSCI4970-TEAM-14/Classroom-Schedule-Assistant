@@ -27,12 +27,11 @@ public class removeClass extends HttpServlet {
 		HttpSession session = request.getSession();
 
 	    String room = request.getParameter("room");
-	    String type = request.getParameter("type");
-		String seats = request.getParameter("seat");
 	
-		Classroom rm = new Classroom(room,type,seats);
-		System.out.println("Entered:" + room + ","+ type + "," + seats);
-        
+		Classroom rm = new Classroom(room);
+		System.out.println("Entered:" + room );
+		
+		db = new BackupDB();
 		    
 			try {
 				boolean status = db.deleteClass(rm);

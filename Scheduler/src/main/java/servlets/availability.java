@@ -117,25 +117,20 @@ public class availability extends HttpServlet {
             throws SQLException, IOException {
     			HttpSession session =  request.getSession();
     			
-                String room = request.getParameter("room");
                 String courseId = request.getParameter("courseId");
                 String sectionId = request.getParameter("sectionId");
                 String instructor = request.getParameter("instructor");	
                 String day = request.getParameter("day");
-                String start= request.getParameter("start");
-                String end = request.getParameter("end");
- 
+      
                 Schedule sh = new Schedule(courseId, sectionId, instructor, day);
-                int status = db.updateSchedule(sh);
-                if(status != 0) {
+                boolean status = db.updateSchedule(sh);
+                if(status) {
                     session.setAttribute("Updated", status);
                     response.sendRedirect("updateSchedule.jsp");                    
                 } else {
                     session.setAttribute("Failed", status);
                     response.sendRedirect("updateSchedule.jsp");
                 }
-                //db.updateSchedule(sh);
-                //response.sendRedirect("updateSchedule.jsp");
     }
     private void userHome(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {

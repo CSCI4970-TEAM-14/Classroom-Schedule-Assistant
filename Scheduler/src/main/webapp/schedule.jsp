@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="servlets.Log" %>
 <%@ page import="entities.Schedule" %>
@@ -49,45 +50,40 @@
 <div class="h">
         <h2><i>PKI Classroom Schedule</i> </h2>
     </div>
+	<sql:setDataSource var="Schedule" driver="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://ec2-3-129-194-150.us-east-2.compute.amazonaws.com:3306/CSA?useSSL=false"
+		user="nangatid" password="TKey" />
+
+	<sql:query var="ListSchedule" dataSource="${Schedule}">
+        SELECT * FROM Schedule;
+    </sql:query>
 	<div align="center">
 		<table border="1" cellpadding="5">
 			<tr>
-                                <th>Classroom</th>
-                                <th>Course</th>
-                                <th> Section</th>
-                                <th>Meeting</th>
-                                <th>Instructor</th>
-                            </tr>
-                            <c:forEach var="sched" items="${ListSchedule.rows}">
-                                <tr>
-                                    <td>
-                                        <c:out value="${sched.room}" />
-                                    </td>
-                                    <td>
-                                        <c:out value="${sched.courseId}" />
-                                    </td>
-                                    <td>
-                                        <c:out value="${sched.section}" />
-                                    </td>
-                                    <td>
-                                        <c:out value="${sched.instructor}" />
-                                    </td>
-                                    <td>
-                                        <c:out value="${sched.day}"/> 
-                                        <c:out value="${sched.start}"/> 
-                                        <c:out value="${sched.end}"  />
-                                    </td>
-                                
-                                </tr>
-                            </c:forEach>
-                        </table>
-                    </div>
+				<th>Course</th>
+				<th>Section</th>
+				<th>Method</th>
+				<th>Enrollment</th>
+				<th>Instructor</th>
+				<th>Meeting</th>
+				<th></th>
+				<th>Classroom</th>
+			</tr>
+			<c:forEach var="sched" items="${ListSchedule.rows}">
+				<tr>
+					<td><c:out value="${sched.course}" /></td>
+					<td><c:out value="${sched.section}" /></td>
+					<td><c:out value="${sched.method}" /></td>
+					<td><c:out value="${sched.enroll}" /></td>
+					<td><c:out value="${sched.instructor}" /></td>
+					<td><c:out value="${sched.day}" /></td>
+					<td><c:out value="${sched.start}"/> - <c:out value="${sched.end}" /></td>
+					<td><c:out value="${sched.room}" /></td>
 
-    <footer>
-					<p></p>
-    </footer>
-
-
-			</body>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
+</body>
 
 </html>

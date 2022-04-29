@@ -31,7 +31,7 @@ public class Section implements Serializable{
 	
 	private String term;
 	
-	private String enroll;
+	private int enroll;
 	
 	private String meeting;
 	
@@ -42,16 +42,16 @@ public class Section implements Serializable{
 	public Section() {
 	}
 
-	public Section(String courseId,String sectionId,String method, String enroll,String instructorId,String term) {
+	public Section(String section,String course,String method, int enroll,String instructorId,String term) {
 		
 		//this.id = id;
-		this.sectionId = sectionId;
+		this.sectionId = section;
 		//this.type = type;
 		this.method = method;
 		this.instructorId = instructorId;
 		this.term = term;
 		this.enroll = enroll;
-		this.courseId = courseId;
+		this.courseId = course;
 	
 	}
 
@@ -62,6 +62,13 @@ public Section(String courseId,String sectionId,String method) {
 		this.courseId = courseId;
 	
 	}
+
+public Section(String sectionId,String course) {
+	
+	this.sectionId = sectionId;
+	this.courseId = course;
+
+}
 	public Integer getId() {
 		return id;
 	}
@@ -106,7 +113,7 @@ public Section(String courseId,String sectionId,String method) {
 		this.term = term;
 	}
 	
-	public String getEnroll() {
+	public int getEnroll() {
 		return enroll;
 	}
 	
@@ -127,7 +134,7 @@ public Section(String courseId,String sectionId,String method) {
 		
 	}
 
-	public void setEnroll(String enroll) {
+	public void setEnroll(int enroll) {
 		this.enroll = enroll;
 		
 	}

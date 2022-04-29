@@ -31,8 +31,16 @@ throws ServletException, IOException {
 		String enroll = request.getParameter("enr");
 		String instructor = request.getParameter("inst");
 		String term = request.getParameter("term");
+		
+		int cap = 0;
+        
+        try { 
+        	cap = Integer.parseInt(enroll);
+        	} catch (NumberFormatException nfe)
+        { nfe.printStackTrace(); }
 			
-		Section sh = new Section(course,section,method,enroll, instructor,term);	
+		Section sh = new Section(section,course, method, cap, instructor,term);	
+		db = new BackupDB();
 		    
 			try {
 				boolean status = db.updateSection(sh);

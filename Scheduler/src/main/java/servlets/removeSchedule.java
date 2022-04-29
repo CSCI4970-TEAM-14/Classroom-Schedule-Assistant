@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,13 +28,14 @@ throws ServletException, IOException {
 		
 	    String course = request.getParameter("course");
 		String section = request.getParameter("sec");
-		String instructor = request.getParameter("in");
-	    String day = request.getParameter("day");
 			
-		Schedule sh = new Schedule(course,section, instructor,day);	
+		Schedule sh = new Schedule(course,section);
+		System.out.println("Entered:" + course + "," + section);
+		
+		db = new BackupDB();
 		    
 			try {
-				boolean status = db.removeSchedule(sh);
+				boolean status = db.deleteSchedule(sh);
 				if(status) {
 					session.setAttribute("Removed", status);
 					response.sendRedirect("removeSchedule.jsp");
@@ -41,7 +44,7 @@ throws ServletException, IOException {
 					session.setAttribute("Failed", status);
 					response.sendRedirect("removeSchedule.jsp");
 				}
-			} catch (IOException e) {
+			} catch (IOException | SQLException e) {
 				e.printStackTrace();
 			}
 	  }
