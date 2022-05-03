@@ -33,7 +33,7 @@ public class Log extends HttpServlet {
              
             if (acc) {
             	session.setAttribute("acc", acc);
-                response.sendRedirect("userHome.jsp?name"+username);
+            	response.sendRedirect("userHome.jsp? name"+db.getAccount(username));
             } else {
             	session.setAttribute("invalid", acc);
 				response.sendRedirect("login.jsp");

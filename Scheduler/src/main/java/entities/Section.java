@@ -54,6 +54,26 @@ public class Section implements Serializable{
 		this.courseId = course;
 	
 	}
+	
+public Section(int id,String section,String course,String method, int enroll,String instructorId) {
+		
+		this.id = id;
+		this.sectionId = section;
+		this.method = method;
+		this.instructorId = instructorId;
+		this.enroll = enroll;
+		this.courseId = course;
+	
+	}
+	
+public Section(String section,String course,String method, int enroll,String instructorId) {
+		this.sectionId = section;
+		this.method = method;
+		this.instructorId = instructorId;
+		this.enroll = enroll;
+		this.courseId = course;
+	
+	}
 
 public Section(String courseId,String sectionId,String method) {
 		

@@ -57,12 +57,18 @@
 
 		<%if (session.getAttribute("Failed") != null){
                 session.setAttribute("Failed", null); %>
-		<p style="color: red"><i>..Failed to update Schedule!..</i>	</p>
+		<p style="color: red"><b>..Failed to update Schedule!..</b>	</p>
 		<% } %>
+		
+		<%if (session.getAttribute("UnAvailable") != null){
+                session.setAttribute("UnAvailable", null); %>
+		<p style="color: red"><b>..Already updated!..</b>	</p>
+		<% } %>
+		
 
 		<%if (session.getAttribute("Updated") != null){
               session.setAttribute("Updated", null); %>
-		<p style="color: green"><i>..Schedule Updated!..</i></p>
+		<p style="color: green"><b>..Schedule Updated!..</b></p>
 		<% } %>
 		<article>
 			<form action="./updateSchedule" method="post">

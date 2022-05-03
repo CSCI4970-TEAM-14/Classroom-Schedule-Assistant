@@ -34,15 +34,13 @@
 		<a href="classView.jsp">View Classrooms</a>
 		<a href="remove.jsp">Remove Data</a>
 		<a href="update.jsp">Update Data</a> 
-		<a href="schedule.jsp">Scheduler</a>
+		
 	</div>
-	<form action="update.jsp" method="get">
+	<form action="assign.jsp" method="get">
 			<label for="select">Choose your option from the list:</label> <input
 			list="selections" name="select" id="select">
 			<datalist id="selections">
-				<option value="Add Schedules"></option>
-				<option value="Remove Schedules"></option>
-				<option value="Update Schedules"> </option>
+				<option value="Assign Sections"></option>
 		</datalist>
 		<input type="submit">
 		</form>

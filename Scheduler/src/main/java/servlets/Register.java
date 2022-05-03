@@ -40,9 +40,9 @@ public class Register extends HttpServlet {
         
         try {
         	boolean status = db.createAccount(acc);
-			if(status){
+			if(status) {
 				   session.setAttribute("Registered", status);
-				   response.sendRedirect("userHome.jsp? name" +firstName);
+				   response.sendRedirect("userHome.jsp? name"+db.getAccount(username));
 			} else {
 			    session.setAttribute("inUse", status);
 				response.sendRedirect("register.jsp");

@@ -26,6 +26,7 @@ public class BackupDB{
 	String Username = "nangatid";
 	String Password = "TKey";	
 	private Connection jdbcConnection;
+	private Schedule sh;
     
 /*//************************************************************Database Connection**************************************************************\\*/	
 	protected void connect() throws SQLException {
@@ -480,14 +481,13 @@ public class BackupDB{
         connect();
         Classroom room = null;
         PreparedStatement statement = null;
-        String sql = "SELECT * FROM Classroom WHERE id = ?";
+        String sql = "SELECT * FROM Classroom WHERE room = ?";
         try {
           statement = jdbcConnection.prepareStatement(sql);
-          statement.setLong(1, Integer.parseInt(id));
+          statement.setString(1, id);
           ResultSet rs = statement.executeQuery();
-          if(rs.next()) {
+          while(rs.next()) {
             room = new Classroom();
-            System.out.println("ID: "+rs.getLong("id"));
             room.setId(rs.getString("room"));
             room.setType(rs.getString("type"));
             room.setSeats(rs.getInt("seat"));
@@ -501,49 +501,218 @@ public class BackupDB{
         statement.close();
         return room;
       }
+    
+    public Account getAccount(String username) throws SQLException {
+        connect();
+        Account acc = null;
+        PreparedStatement statement = null;
+        String sql = "SELECT * FROM Account WHERE username = ?";
+        try {
+          statement = jdbcConnection.prepareStatement(sql);
+          statement.setString(1, username);
+          ResultSet rs = statement.executeQuery();
+          while(rs.next()) {
+            acc = new Account();
+            acc.setUserName(rs.getString("username"));        
+          }
+          
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } 
+        //rs.close();
+        statement.close();
+        return acc;
+      }
+    
+    public boolean getSchedule(String Day, String start, String end, String room) throws SQLException {
+    	connect();
+    	//Schedule sh = null;
+        PreparedStatement statement = null;
+        String sql = "SELECT start, end, room FROM Schedule WHERE day = ?";
+        
+        try{ 
+            statement = jdbcConnection.prepareStatement(sql);
+            statement.setString(1, Day);
+            statement.setString(2, start);
+            statement.setString(3, end);
+            statement.setString(4, room);
+            ResultSet rs = statement.executeQuery();
+         
+            while(rs.next()) {
+            	//sh = new Schedule();
+                rs.getString("day");
+                rs.getString("start");
+                rs.getString("end");
+                rs.getString("room");   
+            }
+            rs.close();
+            statement.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        //disconnect();
+        return false;
+    }
+    
+    /*//************************************************************Assign*********************************************************************\\*/
+       
+    public List<Schedule> listClass() throws SQLException {
+        List<Schedule> list = new ArrayList<>();
+         
+        String sql = "SELECT room FROM Schedule WHERE course IS NULL";
+         
+        connect();
+         
+        Statement statement = jdbcConnection.createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+         
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String course = rs.getString("course");
+            String section = rs.getString("section");
+            String method = rs.getString("method");
+            int enroll = rs.getInt("enroll");
+            String instructor = rs.getString("instructor");
+            String day = rs.getString("day");
+            String start = rs.getString("start");
+            String end = rs.getString("end");
+            String rm = rs.getString("room");
+           Schedule sh = new Schedule(id, course, section, method, enroll, instructor, day, start, end, rm);  
+            list.add(sh);
+        }
+         
+        rs.close();
+        statement.close();
+         
+        disconnect();
+         
+        return list;
+    }
+    
+    public List<Section> listSection() throws SQLException {
+        List<Section> list = new ArrayList<>();
+         
+        String sql = "SELECT section FROM Section WHERE course IS NOT NULL";
+         
+        connect();
+         
+        Statement statement = jdbcConnection.createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+         
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String course = rs.getString("course");
+            String section = rs.getString("section");
+            String method = rs.getString("method");
+            int enroll = rs.getInt("enroll");
+            String instructor = rs.getString("instructor");
+  
+           Section sh = new Section(id,section, course, method, enroll, instructor);  
+            list.add(sh);
+        }
+        rs.close();
+        statement.close();
+        disconnect();
+         
+        return list;
+    }
+    
+    public void Assign() throws SQLException {
+        connect();
+        PreparedStatement statement = null;
+        String sql = "SELECT room FROM Schedule WHERE course, section, method, enroll, instructor IS NULL AND (INSERT IGNORE INTO Schedule (course, section, method, enroll, instructor)";
+            sql += "SELECT method, enroll, instructor FROM Section WHERE section AND course IS NOT NULL)";
+        
+        try{
+        	sh = null;
+        	sh = new Schedule();
+            statement = jdbcConnection.prepareStatement(sql);
+            statement.setString(1, sh.getCourse());
+            statement.setString(2, sh.getSection());
+            statement.setString(3, sh.getMethod());
+            statement.setInt(4,    sh.getEnroll());
+            statement.setString(5, sh.getInstructor());
+            statement.executeUpdate();
 
+            System.out.println(statement);
+          
+            statement.close();
+            disconnect();
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+    }
+    
+    public boolean assignSection(Schedule sh) throws SQLException {
+    	connect();
+    	List<Schedule> sched = new ArrayList<>();
+    	sched = listClass();
+    	List<Section> sec = new ArrayList<>();
+    	sec = listSection();
+    		
+    	//if(sched != null && sec != null)
+    	
+    	String sql = "INSERT IGNORE INTO Schedule (course, section, method, enroll, instructor) VALUES (?, ?, ?, ?,?)";
+         
+        PreparedStatement statement = jdbcConnection.prepareStatement(sql);
+        statement.setString(1, sh.getCourse());
+        statement.setString(2, sh.getSection());
+        statement.setString(3, sh.getMethod());
+        statement.setInt(4, sh.getEnroll());
+        statement.setString(5, sh.getInstructor());
+         
+        boolean rowInserted = statement.executeUpdate() > 0;
+        statement.close();
+        disconnect();
+    	
+    	return rowInserted;
+    }
 /*//************************************************************Import & Export*********************************************************************\\*/
     
     public void Import() throws SQLException {
-         
+        
         String csvFilePath = "c:\\csv\\schedule.csv";
         int batchSize = 20;
         connect();
 
         try {
         	jdbcConnection.setAutoCommit(false);
-            String sql = "INSERT INTO Schedule (course, section, method, enroll, instructor, day, start, end, room) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            //String sql = "INSERT IGNORE INTO Schedule (id, course, section, method, enroll, instructor, day, start, end, room) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Schedule (id, course, section, method, enroll, instructor, day, start, end, room) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?) "; 
+            sql+= " ON DUPLICATE KEY UPDATE course, section, method, enroll, instructor, day, start, end, room";
             PreparedStatement statement = jdbcConnection.prepareStatement(sql);
  
             BufferedReader lineReader = new BufferedReader(new FileReader(csvFilePath));
             String lineText = null;
  
             int count = 0;
- 
             lineReader.readLine(); // skip header line
  
             while ((lineText = lineReader.readLine()) != null) {
                 String[] data = lineText.split(",");
-                //String id = data[0];
-                String course = data[0];
-                String section = data[1];
-                String method = data[2];
-                String enroll = data[3];
-                String instructor = data[4];
-                String day = data[5];
-                String start = data[6];
-                String end = data[7];
-                String room = data[8];
+                String id = data[0];
+                String course = data[1];
+                String section = data[2];
+                String method = data[3];
+                String enroll = data[4];
+                String instructor = data[5];
+                String day = data[6];
+                String start = data[7];
+                String end = data[8];
+                String room = data[9];
                 
-                statement.setString(1, course);
-                statement.setString(2, section);
-                statement.setString(3, method);
-                statement.setInt(4, Integer.parseInt(enroll));
-                statement.setString(5, instructor);
-                statement.setString(6, day);
-                statement.setString(7, start); 
-                statement.setString(8, end);
-                statement.setString(9, room);
+                statement.setString(1, id);
+                statement.setString(2, course);
+                statement.setString(3, section);
+                statement.setString(4, method);
+                statement.setInt(5, Integer.parseInt(enroll));
+                statement.setString(6, instructor);
+                statement.setString(7, day);
+                statement.setString(8, start); 
+                statement.setString(9, end);
+                statement.setString(10, room);
                 statement.addBatch();
  
                 if (count % batchSize == 0) {
@@ -552,13 +721,12 @@ public class BackupDB{
             }
  
             lineReader.close();
- 
-            // execute the remaining queries
+            // execute remaining queries
             statement.executeBatch();
  
             jdbcConnection.commit();
             jdbcConnection.close();
-            System.out.println("<b>You have Successfully imported Csv file.</b>");
+            System.out.println("<b>You have Successfully imported the Csv file.</b>");
  
         } catch (IOException ex) {
             System.err.println(ex);
@@ -573,6 +741,7 @@ public class BackupDB{
         }
         //return false
     }
+    
     
     public void ExportSchedule() throws SQLException {
     String filename = "c:\\csv\\schedule.csv";

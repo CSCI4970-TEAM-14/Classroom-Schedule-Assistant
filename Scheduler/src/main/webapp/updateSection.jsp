@@ -60,6 +60,10 @@
     		<%
     		}
     		%>
+    		<%if (session.getAttribute("UnAvailable") != null){
+                session.setAttribute("UnAvailable", null); %>
+				<p style="color: red"><b>..ALREADY updated!..</b>	</p>
+		<% } %>
     		<%
     		if (session.getAttribute("Updated") != null) {
     			session.setAttribute("Updated", null);

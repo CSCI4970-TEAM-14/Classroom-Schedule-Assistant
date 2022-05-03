@@ -59,6 +59,11 @@
                 session.setAttribute("Failed", null); %>
 		<p style="color: red"><b>..FAILED to add Schedule!..</b>	</p>
 		<% } %>
+		
+		<%if (session.getAttribute("UnAvailable") != null){
+                session.setAttribute("UnAvailable", null); %>
+		<p style="color: red"><b>..ALREADY added!..</b>	</p>
+		<% } %>
 
 		<%if (session.getAttribute("Added") != null){
               session.setAttribute("Added", null); %>

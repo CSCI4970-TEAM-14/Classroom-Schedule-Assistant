@@ -28,10 +28,15 @@
         <a href="scheduleView.jsp"><i class="fa fa-home"></i>Home</a>
         <a href="login.jsp">Logout</a>
     </div>
+    
+    <%if (session.getAttribute("acc") != null){
+					session.setAttribute("acc", null); %>
+					<p style="color: green"><i>..You're in..</i></p>
+			<% } %>
 
     <section>
     <%Account acc = null; %>
-        <h1>Welcome <%request.getAttribute("name"); %>!</h1>
+        <h1>Welcome ${acc.username}!</h1>
         <nav>
             <ul>
                 <div class="relative">

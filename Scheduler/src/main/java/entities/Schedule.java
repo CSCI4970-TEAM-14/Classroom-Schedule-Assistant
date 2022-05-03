@@ -36,6 +36,19 @@ public class Schedule implements Serializable{
 	
 	public Schedule() {
 	}
+	
+	public Schedule(int id, String courseId, String section,String method,int enroll, String instructor, String day, String startTime, String endTime, String room) {
+		this.id = id;
+		this.courseId = courseId;
+		this.section = section;
+		this.method = method;
+		this.enroll = enroll;
+		this.instructor = instructor;
+		this.day = day;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.room = room;
+	}
 
 	public Schedule(String courseId, String section,String method,int enroll, String instructor, String day, String startTime, String endTime, String room) {
 		this.courseId = courseId;

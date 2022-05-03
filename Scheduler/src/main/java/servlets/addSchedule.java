@@ -50,16 +50,21 @@ throws ServletException, IOException {
 		Schedule sh = new Schedule(course,section,method,cap, instructor,day, start,end,room);	
 		   
 		db = new BackupDB();
-			try {
-				boolean status = db.saveSchedule(sh);
-				if(status) {
-					session.setAttribute("Added", status);
-					response.sendRedirect("addSchedule.jsp");
-					
-				} else {
-					session.setAttribute("Failed", status);
-					response.sendRedirect("addSchedule.jsp");
-				}
+		try {
+			boolean status = db.saveSchedule(sh);
+			boolean get = db.getSchedule(day, start, end, room);
+			if(get) {
+				session.setAttribute("UnAvailable", get);
+                response.sendRedirect("addSchedule.jsp");
+                
+            } else if(status){ 
+                session.setAttribute("Added", status);
+                response.sendRedirect("addSchedule.jsp");
+            }
+            else {
+				session.setAttribute("Failed", status);
+				response.sendRedirect("addSchedule.jsp");
+			}
 			} catch (IOException | SQLException e) {
 				e.printStackTrace();
 			}
