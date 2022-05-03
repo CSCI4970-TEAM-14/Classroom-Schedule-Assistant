@@ -68,7 +68,7 @@
         </nav>
         <article>
 		
-		<form action="./import2.jsp" method="post">
+		<form action="./importServlet" method="post">
 		<div class="container">
 			<table >
 				<tr>

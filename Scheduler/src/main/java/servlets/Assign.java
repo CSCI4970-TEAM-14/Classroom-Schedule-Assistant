@@ -2,6 +2,9 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import DB.BackupDB;
 import entities.Schedule;
+import entities.Section;
 
 @WebServlet("/Assign")
 public class Assign extends HttpServlet {
@@ -30,6 +34,7 @@ public class Assign extends HttpServlet {
 		        
 		Schedule sh = new Schedule(course, section);
 		System.out.println("Entered:" + section + ","+ section);
+    		
         
 		    db = new BackupDB();
 			try {

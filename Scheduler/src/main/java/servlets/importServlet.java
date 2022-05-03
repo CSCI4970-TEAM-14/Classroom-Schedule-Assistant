@@ -3,7 +3,6 @@ package servlets;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,14 +31,9 @@ public class importServlet extends HttpServlet {
         db = new BackupDB();
 
         try {
-           db.Import();
-			if(db == null){
+           db.Import(); //calling import function
 				   session.setAttribute("Imported", db);
 				   response.sendRedirect("import.jsp");
-			} else {
-			    session.setAttribute("Failed", db);
-				response.sendRedirect("import.jsp");
-			    }
 		} catch (SQLException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

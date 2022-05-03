@@ -652,7 +652,7 @@ public class BackupDB{
     	List<Section> sec = new ArrayList<>();
     	sec = listSection();
     		
-    	//if(sched != null && sec != null)
+    	if(sched != null && sec != null) {
     	
     	String sql = "INSERT IGNORE INTO Schedule (course, section, method, enroll, instructor) VALUES (?, ?, ?, ?,?)";
          
@@ -667,7 +667,8 @@ public class BackupDB{
         statement.close();
         disconnect();
     	
-    	return rowInserted;
+    	return rowInserted;}
+    	return false;
     }
 /*//************************************************************Import & Export*********************************************************************\\*/
     
@@ -679,9 +680,7 @@ public class BackupDB{
 
         try {
         	jdbcConnection.setAutoCommit(false);
-            //String sql = "INSERT IGNORE INTO Schedule (id, course, section, method, enroll, instructor, day, start, end, room) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            String sql = "INSERT INTO Schedule (id, course, section, method, enroll, instructor, day, start, end, room) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?) "; 
-            sql+= " ON DUPLICATE KEY UPDATE course, section, method, enroll, instructor, day, start, end, room";
+            String sql = "INSERT INTO Schedule (course, section, method, enroll, instructor, day, start, end, room) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = jdbcConnection.prepareStatement(sql);
  
             BufferedReader lineReader = new BufferedReader(new FileReader(csvFilePath));
@@ -692,27 +691,26 @@ public class BackupDB{
  
             while ((lineText = lineReader.readLine()) != null) {
                 String[] data = lineText.split(",");
-                String id = data[0];
-                String course = data[1];
-                String section = data[2];
-                String method = data[3];
-                String enroll = data[4];
-                String instructor = data[5];
-                String day = data[6];
-                String start = data[7];
-                String end = data[8];
-                String room = data[9];
+                String course = data[0];
+                String section = data[1];
+                String method = data[2];
+                String enroll = data[3];
+                String instructor = data[4];
+                String day = data[5];
+                String start = data[6];
+                String end = data[7];
+                String room = data[8];
                 
-                statement.setString(1, id);
-                statement.setString(2, course);
-                statement.setString(3, section);
-                statement.setString(4, method);
-                statement.setInt(5, Integer.parseInt(enroll));
-                statement.setString(6, instructor);
-                statement.setString(7, day);
-                statement.setString(8, start); 
-                statement.setString(9, end);
-                statement.setString(10, room);
+            
+                statement.setString(1, course);
+                statement.setString(2, section);
+                statement.setString(3, method);
+                statement.setInt(4, Integer.parseInt(enroll));
+                statement.setString(5, instructor);
+                statement.setString(6, day);
+                statement.setString(7, start); 
+                statement.setString(8, end);
+                statement.setString(9, room);
                 statement.addBatch();
  
                 if (count % batchSize == 0) {
