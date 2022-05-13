@@ -30,7 +30,7 @@ public class LoginTest {
          System.out.println("Login Test Case Failed . . .!");
       }
       //Closing browser session 
-      //g.close();
+      //g.close(); 
     	
    }
 }
