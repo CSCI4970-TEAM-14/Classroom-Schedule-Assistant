@@ -40,6 +40,7 @@
         <nav>
             <ul>
                 <div class="relative">
+                <li class="b"><a href="schedule.jsp" style="color: white">Assign</a></li>
                 <li class="b"><a href="update.jsp" style="color: white">Update </a></li>
                 <li class="b"><a href="remove.jsp" style="color: white">Remove</a></li>
                 <li class="b"><a href="export.jsp" style="color: white">Export</a></li>

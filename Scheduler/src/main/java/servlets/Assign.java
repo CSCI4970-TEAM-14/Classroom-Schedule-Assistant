@@ -20,6 +20,7 @@ import entities.Section;
 public class Assign extends HttpServlet {
   private static final long serialVersionUID = 1L;
   private BackupDB db;
+  private Section sched;
 
   public Assign() {
       super();
@@ -29,10 +30,17 @@ public class Assign extends HttpServlet {
   throws ServletException, IOException {
 		HttpSession session = request.getSession();
 
-	    String section = request.getParameter("sec");
-	    String course = request.getParameter("crs");
+	    String section = request.getParameter(sched.getSection());
+	    String course = request.getParameter(sched.getCourseId());
+	    
+		/*
+		 * try { List<Section> list = db.listSection(section, course); } catch
+		 * (SQLException e1) { // TODO Auto-generated catch block e1.printStackTrace();
+		 * }
+		 */
+	    
 		        
-		Schedule sh = new Schedule(course, section);
+		Section sh = new Section(course, section);
 		System.out.println("Entered:" + section + ","+ section);
     		
         

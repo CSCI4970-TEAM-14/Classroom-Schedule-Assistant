@@ -589,20 +589,23 @@ public class BackupDB{
         return list;
     }
     
-    public List<Section> listSection() throws SQLException {
+    public List<Section> listSection(String section, String course) throws SQLException {
         List<Section> list = new ArrayList<>();
+        PreparedStatement statement = null;
          
         String sql = "SELECT section FROM Section WHERE course IS NOT NULL";
          
         connect();
          
-        Statement statement = jdbcConnection.createStatement();
-        ResultSet rs = statement.executeQuery(sql);
+        statement = jdbcConnection.prepareStatement(sql);
+        statement.setString(1, section);
+        statement.setString(2, course);
+        ResultSet rs = statement.executeQuery();
          
         while (rs.next()) {
             int id = rs.getInt("id");
-            String course = rs.getString("course");
-            String section = rs.getString("section");
+            rs.getString("course");
+            rs.getString("section");
             String method = rs.getString("method");
             int enroll = rs.getInt("enroll");
             String instructor = rs.getString("instructor");
@@ -645,19 +648,13 @@ public class BackupDB{
 
     }
     
-    public boolean assignSection(Schedule sh) throws SQLException {
-    	connect();
-    	List<Schedule> sched = new ArrayList<>();
-    	sched = listClass();
-    	List<Section> sec = new ArrayList<>();
-    	sec = listSection();
-    		
-    	if(sched != null && sec != null) {
+    public boolean assignSection(Section sh) throws SQLException {
+    	connect();  	
     	
     	String sql = "INSERT IGNORE INTO Schedule (course, section, method, enroll, instructor) VALUES (?, ?, ?, ?,?)";
          
         PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-        statement.setString(1, sh.getCourse());
+        statement.setString(1, sh.getCourseId());
         statement.setString(2, sh.getSection());
         statement.setString(3, sh.getMethod());
         statement.setInt(4, sh.getEnroll());
@@ -667,8 +664,7 @@ public class BackupDB{
         statement.close();
         disconnect();
     	
-    	return rowInserted;}
-    	return false;
+    	return rowInserted;
     }
 /*//************************************************************Import & Export*********************************************************************\\*/
     
