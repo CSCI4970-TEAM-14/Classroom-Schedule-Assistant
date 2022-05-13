@@ -1,6 +1,0 @@
-<map id="servlets.Login.doGet" name="servlets.Login.doGet">
-<area shape="rect" id="node1" title=" " alt="" coords="5,38,145,65"/>
-<area shape="rect" id="node2" href="$classutil_1_1_util_account.html#ab318c81fc2862fd533150a41b1b8fbe6" title=" " alt="" coords="201,13,381,39"/>
-<area shape="rect" id="node4" href="$classentities_1_1_account.html#a93296950e7e68f1c2c8939a462e705bc" title=" " alt="" coords="193,63,388,90"/>
-<area shape="rect" id="node3" href="$classutil_1_1_hibernate.html#a06a52e6011cf4b769e71bf358c5a6d80" title=" " alt="" coords="436,5,603,47"/>
-</map>

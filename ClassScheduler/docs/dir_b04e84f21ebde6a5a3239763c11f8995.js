@@ -1,4 +1,0 @@
-var dir_b04e84f21ebde6a5a3239763c11f8995 =
-[
-    [ "Git", "dir_301f0146228b318f9b21f94b5a5fd053.html", "dir_301f0146228b318f9b21f94b5a5fd053" ]
-];
