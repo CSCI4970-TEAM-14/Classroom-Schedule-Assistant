@@ -1,0 +1,2 @@
+# Classroom-Schedule-Assistant
+An application that can assist in assigning sections to classrooms and take into account a variety factors. The application supportS the capability of re-assigning classrooms while minimizing the number of rooms that are moved around. The application is able to support manual classroom assignment, detection of capacity overflow, etc.It is also desired in the future, in light of COVID, to be able to automatically adjust the classroom assignments, in case room capacities are reduced to de-densify the classroom.
